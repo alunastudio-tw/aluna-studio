@@ -212,20 +212,13 @@
       position: relative;
     }
 
-    /* Placeholder gradients (replace with <img> when photos ready) */
-    .ph-mirror  { background: linear-gradient(155deg, #e6d4b8 0%, #c8a060 60%, #a07840 100%); }
-    .ph-bowls   { background: linear-gradient(140deg, #d4b080 0%, #b88840 50%, #8a6828 100%); }
-    .ph-bath    { background: linear-gradient(160deg, #ece8e0 0%, #d8cfc0 50%, #c0b098 100%); }
-
-    .ph-label {
-      position: absolute;
-      bottom: 1.25rem;
-      left: 1.25rem;
-      font-size: 1rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(44, 36, 24, 0.35);
+    .space-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
+
 
     .space-copy {
       padding: 0 0 0 4rem;
@@ -542,8 +535,7 @@
   <section id="about" class="space">
     <div class="space-grid">
       <div class="space-img ph-mirror reveal">
-        <!-- 換成實際空間照：<img src="images/mirror.jpg" alt="整面落地鏡牆"> -->
-        <span class="ph-label">整面落地鏡牆</span>
+        <img src="images/mirror.jpg" alt="整面落地鏡牆">
       </div>
       <div class="space-copy reveal reveal-d2">
         <p class="label">空間特色</p>
@@ -571,8 +563,7 @@
   <section class="space">
     <div class="space-grid alt">
       <div class="space-img ph-bowls reveal reveal-d1">
-        <!-- 換成實際照片：<img src="images/bowls.jpg" alt="15 個西藏頌缽"> -->
-        <span class="ph-label">15 個西藏頌缽</span>
+        <img src="images/bowls.jpg" alt="15 個西藏頌缽">
       </div>
       <div class="space-copy reveal">
         <p class="label">核心資產</p>
@@ -600,8 +591,7 @@
   <section class="space">
     <div class="space-grid">
       <div class="space-img ph-bath reveal">
-        <!-- 換成實際照片：<img src="images/bath.jpg" alt="獨立衛浴含淋浴"> -->
-        <span class="ph-label">獨立衛浴含淋浴</span>
+        <img src="images/bath.jpg" alt="獨立衛浴含淋浴">
       </div>
       <div class="space-copy reveal reveal-d2">
         <p class="label">完整設備</p>
