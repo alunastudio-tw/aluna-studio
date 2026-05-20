@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlunaStudio 艾妮莎綜合療癒工作室｜新北投</title>
+  <meta name="description" content="新北投私人療癒空間。木地板、整面落地鏡牆、15 個頌缽，電子鎖自主入場。時租 NT$400 起，週一至日 09:00–18:00。" />
+  <meta property="og:title" content="AlunaStudio 艾妮莎綜合療癒工作室" />
+  <meta property="og:description" content="新北投，一個可以停留的地方。" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────── */
+    :root {
+      --wall:  #FAFAF7;
+      --wood:  #D4B090;
+      --gold:  #C9A84C;
+      --bark:  #2C2418;
+      --clay:  #9E896A;
+      --bark-10: rgba(44, 36, 24, 0.10);
+      --clay-20: rgba(158, 137, 106, 0.20);
+      --clay-40: rgba(158, 137, 106, 0.40);
+      --wall-80: rgba(250, 250, 247, 0.80);
+
+      --serif: 'Noto Serif TC', 'Songti TC', serif;
+      --sans:  'Noto Sans TC', 'PingFang TC', sans-serif;
+
+      --section-v: 9rem;
+      --section-h: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      :root {
+        --section-v: 11rem;
+        --section-h: 5rem;
+      }
+    }
+
+    /* ─── Reset ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--wall);
+      color: var(--bark);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button { background: none; border: none; cursor: pointer; font: inherit; }
+
+    /* ─── Reveal Animation ───────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible   { opacity: 1; transform: translateY(0); }
+    .reveal-d1        { transition-delay: 0.12s; }
+    .reveal-d2        { transition-delay: 0.22s; }
+    .reveal-d3        { transition-delay: 0.34s; }
+    .reveal-d4        { transition-delay: 0.46s; }
+    .reveal-d5        { transition-delay: 0.56s; }
+    .reveal-d6        { transition-delay: 0.66s; }
+
+    /* ─── Typography Helpers ─────────────────────────────── */
+    .label {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+
+    /* ─── Navigation ─────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.6rem var(--section-h);
+      pointer-events: none;
+    }
+    .nav > * { pointer-events: auto; }
+
+    .nav-brand {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--bark);
+      opacity: 0.75;
+    }
+    .nav-cta {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--clay);
+      transition: color 0.4s ease;
+    }
+    .nav-cta:hover { color: var(--bark); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      padding: var(--section-h);
+      padding-top: calc(var(--section-h) + 5rem);
+      padding-bottom: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+    .hero-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      line-height: 1.12;
+      color: var(--bark);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 0.82rem;
+      color: var(--clay);
+      line-height: 2;
+      max-width: 22rem;
+    }
+
+    .hero-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .scroll-cue {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--clay);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      opacity: 0.55;
+    }
+    .scroll-cue::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--clay);
+    }
+
+    .hero-meta {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--clay);
+      opacity: 0.4;
+    }
+
+    /* ─── Rule ───────────────────────────────────────────── */
+    .rule {
+      height: 1px;
+      background: var(--clay-20);
+      margin: 0 var(--section-h);
+    }
+
+    /* ─── SPACE ──────────────────────────────────────────── */
+    .space {
+      padding: var(--section-v) var(--section-h);
+    }
+
+    .space-grid {
+      display: grid;
+      gap: 3rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .space-grid           { grid-template-columns: 55% 1fr; gap: 0; }
+      .space-grid.alt       { grid-template-columns: 1fr 55%; }
+      .space-grid.alt .space-img   { order: 2; }
+      .space-grid.alt .space-copy  { order: 1; padding-right: 4rem; padding-left: 0; }
+    }
+
+    .space-img {
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Placeholder gradients (replace with <img> when photos ready) */
+    .ph-mirror  { background: linear-gradient(155deg, #e6d4b8 0%, #c8a060 60%, #a07840 100%); }
+    .ph-bowls   { background: linear-gradient(140deg, #d4b080 0%, #b88840 50%, #8a6828 100%); }
+    .ph-bath    { background: linear-gradient(160deg, #ece8e0 0%, #d8cfc0 50%, #c0b098 100%); }
+
+    .ph-label {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(44, 36, 24, 0.35);
+    }
+
+    .space-copy {
+      padding: 0 0 0 4rem;
+      max-width: 380px;
+    }
+    @media (max-width: 767px) { .space-copy { padding: 0; max-width: 100%; } }
+
+    .space-heading {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+      margin-top: 1.75rem;
+    }
+
+    .gold-mark {
+      width: 1.75rem;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .space-body {
+      font-size: 0.82rem;
+      color: var(--clay);
+      line-height: 2;
+    }
+    .space-body + .space-body { margin-top: 1rem; }
+
+    /* ─── SCENARIOS (dark) ──────────────────────────────── */
+    .scenarios {
+      background: var(--bark);
+      padding: var(--section-v) var(--section-h);
+    }
+
+    .scenarios-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .scenarios-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--clay);
+      opacity: 0.45;
+      margin-bottom: 4rem;
+    }
+
+    .scenario {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 2rem;
+      align-items: baseline;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid rgba(250, 250, 247, 0.07);
+    }
+    .scenario:first-of-type { border-top: 1px solid rgba(250, 250, 247, 0.07); }
+
+    .scenario-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.65;
+      padding-top: 0.25rem;
+    }
+
+    .scenario-text {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      line-height: 1.65;
+      color: rgba(250, 250, 247, 0.78);
+    }
+
+    @media (max-width: 480px) {
+      .scenario               { grid-template-columns: 1fr; gap: 0.4rem; }
+      .scenario-tag           { font-size: 0.55rem; }
+    }
+
+    /* ─── PRICING ────────────────────────────────────────── */
+    .pricing {
+      padding: var(--section-v) var(--section-h);
+    }
+
+    .pricing-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .pricing-head {
+      display: grid;
+      gap: 3rem;
+      margin-bottom: 4.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .pricing-head { grid-template-columns: 1fr 1.6fr; align-items: end; }
+    }
+
+    .pricing-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.4;
+    }
+
+    .pricing-desc {
+      font-size: 0.8rem;
+      color: var(--clay);
+      line-height: 2;
+    }
+
+    .plan {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--clay-20);
+    }
+    .plan:first-of-type { border-top: 1px solid var(--clay-20); }
+
+    .plan-name {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 1.12rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .plan-note {
+      font-size: 0.72rem;
+      color: var(--clay);
+      line-height: 1.8;
+    }
+
+    .plan-price {
+      text-align: right;
+    }
+
+    .plan-amount {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 1.08rem;
+      white-space: nowrap;
+    }
+
+    .plan-unit {
+      font-size: 0.62rem;
+      color: var(--clay);
+      margin-top: 0.25rem;
+      text-align: right;
+    }
+
+    /* ─── CONTACT ────────────────────────────────────────── */
+    .contact {
+      padding: var(--section-v) var(--section-h);
+      border-top: 1px solid var(--clay-20);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .contact-heading {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-sub {
+      font-size: 0.82rem;
+      color: var(--clay);
+      line-height: 2;
+      margin-bottom: 3.5rem;
+    }
+
+    .line-cta {
+      display: inline-block;
+      border: 1px solid var(--bark);
+      color: var(--bark);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      padding: 1rem 2.75rem;
+      transition: background 0.4s ease, color 0.4s ease;
+      margin-bottom: 3.5rem;
+    }
+    .line-cta:hover {
+      background: var(--bark);
+      color: var(--wall);
+    }
+
+    .contact-address {
+      font-size: 0.72rem;
+      color: var(--clay);
+      line-height: 2;
+      opacity: 0.65;
+    }
+
+    /* ─── SELECTS ───────────────────────────────────────── */
+    .selects {
+      padding: var(--section-v) var(--section-h);
+      background: #F0EAE2;
+    }
+    .selects-inner { max-width: 1100px; margin: 0 auto; }
+    .selects-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4rem;
+    }
+    @media (max-width: 767px) { .selects-head { flex-direction: column; gap: 0.5rem; } }
+    .selects-note { font-size: 0.72rem; color: var(--clay); letter-spacing: 0.04em; }
+    .selects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2.5rem;
+    }
+    @media (max-width: 767px) { .selects-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .select-img {
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+    .ph-obj   { background: linear-gradient(150deg, #DDD0BC 0%, #C4A88A 60%, #A88860 100%); }
+    .ph-scent { background: linear-gradient(150deg, #E6E0D8 0%, #D0C4B4 60%, #B8A898 100%); }
+    .ph-food  { background: linear-gradient(150deg, #D6CABD 0%, #C0B0A0 60%, #A49080 100%); }
+    .select-name {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0.5rem 0 0.5rem;
+    }
+    .select-desc { font-size: 0.72rem; color: var(--clay); line-height: 1.9; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      padding: 2rem var(--section-h);
+      border-top: 1px solid rgba(158, 137, 106, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--clay);
+      opacity: 0.55;
+    }
+
+    .footer-year {
+      font-size: 0.6rem;
+      color: var(--clay);
+      opacity: 0.35;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────── -->
+  <nav class="nav">
+    <span class="nav-brand">AlunaStudio</span>
+    <a href="https://line.me/R/ti/p/@380shuki" class="nav-cta">私訊預約 →</a>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-body">
+      <p class="hero-eyebrow reveal">新北投 · Beitou, Taipei</p>
+      <h1 class="hero-title serif reveal reveal-d1">
+        艾妮莎<br />
+        綜合療癒工作室
+      </h1>
+      <p class="hero-tagline reveal reveal-d2">
+        一個可以停留的地方。<br />
+        週一至日，09:00–18:00。
+      </p>
+    </div>
+    <div class="hero-foot reveal reveal-d3">
+      <span class="scroll-cue">往下了解</span>
+      <span class="hero-meta">Taipei · 2024</span>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ── Space Feature 1：落地鏡牆 ─────────────────────── -->
+  <section class="space">
+    <div class="space-grid">
+      <div class="space-img ph-mirror reveal">
+        <!-- 換成實際空間照：<img src="images/mirror.jpg" alt="整面落地鏡牆"> -->
+        <span class="ph-label">整面落地鏡牆</span>
+      </div>
+      <div class="space-copy reveal reveal-d2">
+        <p class="label">空間特色</p>
+        <h2 class="space-heading">
+          整面落地鏡牆，<br />
+          讓空間感覺<br />
+          像兩倍大。
+        </h2>
+        <div class="gold-mark"></div>
+        <p class="space-body">
+          近 8 坪全可用，鋪設原木色木地板，<br />
+          無縫落地鏡牆延伸視野。
+        </p>
+        <p class="space-body">
+          位於新北投集合住宅 2 樓，<br />
+          電子鎖自主入場，不需等人開門。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ── Space Feature 2：15 個頌缽 ─────────────────────── -->
+  <section class="space">
+    <div class="space-grid alt">
+      <div class="space-img ph-bowls reveal reveal-d1">
+        <!-- 換成實際照片：<img src="images/bowls.jpg" alt="15 個西藏頌缽"> -->
+        <span class="ph-label">15 個西藏頌缽</span>
+      </div>
+      <div class="space-copy reveal">
+        <p class="label">核心資產</p>
+        <h2 class="space-heading">
+          15 個頌缽，<br />
+          你只需要<br />
+          帶自己來。
+        </h2>
+        <div class="gold-mark"></div>
+        <p class="space-body">
+          大小不一，每個都有自己的音頻。<br />
+          市值近 NT$200,000，<br />
+          是台北少有的完整頌缽空間。
+        </p>
+        <p class="space-body">
+          無需搬運器材，直接開始工作。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ── Space Feature 3：獨立衛浴 ──────────────────────── -->
+  <section class="space">
+    <div class="space-grid">
+      <div class="space-img ph-bath reveal">
+        <!-- 換成實際照片：<img src="images/bath.jpg" alt="獨立衛浴含淋浴"> -->
+        <span class="ph-label">獨立衛浴含淋浴</span>
+      </div>
+      <div class="space-copy reveal reveal-d2">
+        <p class="label">完整設備</p>
+        <h2 class="space-heading">
+          課後可以在<br />
+          這裡整理，<br />
+          不用急著走。
+        </h2>
+        <div class="gold-mark"></div>
+        <p class="space-body">
+          獨立衛浴含淋浴、智慧馬桶、洗手台。<br />
+          此外還有 Bose 音響、投影機、<br />
+          分離式冷氣、空中環與空中繩。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Scenarios (dark) ────────────────────────────────── -->
+  <section class="scenarios">
+    <div class="scenarios-inner">
+      <p class="scenarios-label reveal">這個空間，適合你</p>
+
+      <div class="scenario reveal reveal-d1">
+        <span class="scenario-tag">頌缽音療師</span>
+        <p class="scenario-text">15 個頌缽都在，你只需要帶自己來。</p>
+      </div>
+      <div class="scenario reveal reveal-d2">
+        <span class="scenario-tag">瑜珈老師</span>
+        <p class="scenario-text">整面落地鏡，學員可以在這裡清楚看見自己。</p>
+      </div>
+      <div class="scenario reveal reveal-d3">
+        <span class="scenario-tag">身心靈療癒師</span>
+        <p class="scenario-text">隱密，私人，一對一個案的完整空間。</p>
+      </div>
+      <div class="scenario reveal reveal-d4">
+        <span class="scenario-tag">塔羅・占星師</span>
+        <p class="scenario-text">你的個案，值得一個安靜而安全的地方。</p>
+      </div>
+      <div class="scenario reveal reveal-d5">
+        <span class="scenario-tag">空中環・空中繩</span>
+        <p class="scenario-text">台北少有，這裡都有，使用簽署同意書即可。</p>
+      </div>
+      <div class="scenario reveal reveal-d6">
+        <span class="scenario-tag">美業工作者</span>
+        <p class="scenario-text">鏡牆、獨立衛浴、私密入口，你的客人不會碰到任何不相干的人。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing ──────────────────────────────────────────── -->
+  <section class="pricing">
+    <div class="pricing-inner">
+      <div class="pricing-head">
+        <div class="reveal">
+          <p class="label" style="margin-bottom: 1.5rem;">使用方案</p>
+          <h2 class="pricing-title">
+            依你的<br />節奏使用
+          </h2>
+        </div>
+        <p class="pricing-desc reveal reveal-d1">
+          偶爾需要空間，或已有固定課表——<br />
+          都有對應的方式。<br />
+          時數越多，折合時薪越低。
+        </p>
+      </div>
+
+      <div class="plan reveal">
+        <div>
+          <p class="plan-name">時租</p>
+          <p class="plan-note">
+            最低 2 小時・提前 24 小時預訂・預付<br />
+            假日 NT$500/h
+          </p>
+        </div>
+        <div class="plan-price">
+          <p class="plan-amount">NT$400<span style="font-size:0.7em; color:var(--clay);">/h</span></p>
+          <p class="plan-unit">平日</p>
+        </div>
+      </div>
+
+      <div class="plan reveal reveal-d1">
+        <div>
+          <p class="plan-name">半日方案</p>
+          <p class="plan-note">
+            上午場 09:00–13:00（4h）NT$1,500<br />
+            下午場 13:00–18:00（5h）NT$1,800<br />
+            提前 48 小時預訂
+          </p>
+        </div>
+        <div class="plan-price">
+          <p class="plan-amount">NT$1,500<span style="font-size:0.7em; color:var(--clay);">起</span></p>
+          <p class="plan-unit">平日</p>
+        </div>
+      </div>
+
+      <div class="plan reveal reveal-d2">
+        <div>
+          <p class="plan-name">月租固定時段</p>
+          <p class="plan-note">
+            8h/月 NT$2,700・16h/月 NT$5,400・20h/月 NT$6,800<br />
+            最低合約 3 個月・押金 1 個月<br />
+            月租客可在指定置物格留放個人器材
+          </p>
+        </div>
+        <div class="plan-price">
+          <p class="plan-amount">NT$2,700<span style="font-size:0.7em; color:var(--clay);">起</span></p>
+          <p class="plan-unit">每月 8h</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Selects ──────────────────────────────────────────── -->
+  <section class="selects">
+    <div class="selects-inner">
+      <div class="selects-head reveal">
+        <p class="label">空間選物</p>
+        <p class="selects-note">有些東西，因為放在這裡才特別。</p>
+      </div>
+      <div class="selects-grid">
+        <article class="select-item reveal reveal-d1">
+          <div class="select-img ph-obj" data-fe-photo="obj">
+            <span class="ph-label">空間物件</span>
+          </div>
+          <p class="label">空間物件</p>
+          <h3 class="select-name">讓空間開口說話的物件</h3>
+          <p class="select-desc">每一個擺在這裡的東西，<br>都是刻意挑選的。</p>
+        </article>
+        <article class="select-item reveal reveal-d2">
+          <div class="select-img ph-scent" data-fe-photo="scent">
+            <span class="ph-label">日常香氛</span>
+          </div>
+          <p class="label">日常香氛</p>
+          <h3 class="select-name">聞到就能放下的氣味</h3>
+          <p class="select-desc">進門的第一口空氣，<br>決定了整堂課的狀態。</p>
+        </article>
+        <article class="select-item reveal reveal-d3">
+          <div class="select-img ph-food" data-fe-photo="food">
+            <span class="ph-label">生活好食</span>
+          </div>
+          <p class="label">生活好食</p>
+          <h3 class="select-name">工作之後，好好吃點東西</h3>
+          <p class="select-desc">精選讓人想帶回家的<br>食物與茶。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ──────────────────────────────────────────── -->
+  <section class="contact">
+    <div class="contact-inner">
+      <p class="label reveal">聯繫方式</p>
+      <h2 class="contact-heading reveal reveal-d1">
+        有問題，<br />私訊我就好。
+      </h2>
+      <p class="contact-sub reveal reveal-d2">
+        告訴我你需要什麼類型的空間、<br />
+        大概每次幾小時。<br />
+        我來判斷哪個方案最適合你。
+      </p>
+      <a href="https://line.me/R/ti/p/@380shuki" class="line-cta reveal reveal-d3">LINE 私訊</a>
+      <p class="contact-address reveal reveal-d4">
+        台北市北投區中山路 45 號 2 樓之 5<br />
+        新北投捷運站步行可達<br />
+        週一至日 09:00–18:00
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer>
+    <span class="footer-name">AlunaStudio 艾妮莎綜合療癒工作室</span>
+    <span class="footer-year">© 2026</span>
+  </footer>
+
+  <!-- ── Scroll Reveal ─────────────────────────────────────── -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Hero: trigger immediately on load
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.hero .reveal').forEach((el) => {
+        setTimeout(() => el.classList.add('visible'), 100);
+      });
+    });
+  </script>
+
+  <!-- 從後台讀取照片（與 AlunaStudio-admin.html 同網域部署時自動同步） -->
+  <script>
+    (function () {
+      try {
+        var fp = JSON.parse(localStorage.getItem('aluna_fe_photos') || '{}');
+        var slots = [
+          ['mirror', '.ph-mirror'],
+          ['bowls',  '.ph-bowls'],
+          ['bath',   '.ph-bath'],
+          ['obj',    '[data-fe-photo="obj"]'],
+          ['scent',  '[data-fe-photo="scent"]'],
+          ['food',   '[data-fe-photo="food"]']
+        ];
+        slots.forEach(function (s) {
+          if (!fp[s[0]]) return;
+          var el = document.querySelector(s[1]);
+          if (!el) return;
+          var img = document.createElement('img');
+          img.src = fp[s[0]];
+          img.alt = '';
+          img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
+          el.insertBefore(img, el.firstChild);
+        });
+      } catch (e) {}
+    })();
+  </script>
+
+</body>
+</html>
