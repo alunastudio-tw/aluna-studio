@@ -73,7 +73,7 @@
     /* ─── Typography Helpers ─────────────────────────────── */
     .label {
       font-family: var(--sans);
-      font-size: 0.62rem;
+      font-size: 1.05rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--clay);
@@ -94,7 +94,7 @@
 
     .nav-brand {
       font-family: var(--sans);
-      font-size: 0.62rem;
+      font-size: 0.85rem;
       font-weight: 400;
       letter-spacing: 0.3em;
       text-transform: uppercase;
@@ -102,7 +102,7 @@
       opacity: 0.75;
     }
     .nav-cta {
-      font-size: 0.62rem;
+      font-size: 0.85rem;
       letter-spacing: 0.18em;
       color: var(--clay);
       transition: color 0.4s ease;
@@ -123,7 +123,7 @@
     .hero-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 
     .hero-eyebrow {
-      font-size: 0.62rem;
+      font-size: 0.9rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--clay);
@@ -140,7 +140,7 @@
     }
 
     .hero-tagline {
-      font-size: 0.82rem;
+      font-size: 1.05rem;
       color: var(--clay);
       line-height: 2;
       max-width: 22rem;
@@ -157,10 +157,13 @@
       align-items: center;
       gap: 0.75rem;
       color: var(--clay);
-      font-size: 0.6rem;
+      font-size: 0.85rem;
       letter-spacing: 0.25em;
-      opacity: 0.55;
+      opacity: 0.65;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
     }
+    .scroll-cue:hover { opacity: 1; }
     .scroll-cue::before {
       content: '';
       display: block;
@@ -170,7 +173,7 @@
     }
 
     .hero-meta {
-      font-size: 0.6rem;
+      font-size: 0.78rem;
       letter-spacing: 0.2em;
       color: var(--clay);
       opacity: 0.4;
@@ -218,7 +221,7 @@
       position: absolute;
       bottom: 1.25rem;
       left: 1.25rem;
-      font-size: 0.6rem;
+      font-size: 1rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: rgba(44, 36, 24, 0.35);
@@ -247,7 +250,7 @@
     }
 
     .space-body {
-      font-size: 0.82rem;
+      font-size: 1.3rem;
       color: var(--clay);
       line-height: 2;
     }
@@ -265,7 +268,7 @@
     }
 
     .scenarios-label {
-      font-size: 0.6rem;
+      font-size: 1.05rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--clay);
@@ -284,7 +287,7 @@
     .scenario:first-of-type { border-top: 1px solid rgba(250, 250, 247, 0.07); }
 
     .scenario-tag {
-      font-size: 0.6rem;
+      font-size: 1.05rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
@@ -333,7 +336,7 @@
     }
 
     .pricing-desc {
-      font-size: 0.8rem;
+      font-size: 1.25rem;
       color: var(--clay);
       line-height: 2;
     }
@@ -356,7 +359,7 @@
     }
 
     .plan-note {
-      font-size: 0.72rem;
+      font-size: 1.15rem;
       color: var(--clay);
       line-height: 1.8;
     }
@@ -373,7 +376,7 @@
     }
 
     .plan-unit {
-      font-size: 0.62rem;
+      font-size: 1.05rem;
       color: var(--clay);
       margin-top: 0.25rem;
       text-align: right;
@@ -401,7 +404,7 @@
     }
 
     .contact-sub {
-      font-size: 0.82rem;
+      font-size: 1.3rem;
       color: var(--clay);
       line-height: 2;
       margin-bottom: 3.5rem;
@@ -411,7 +414,7 @@
       display: inline-block;
       border: 1px solid var(--bark);
       color: var(--bark);
-      font-size: 0.68rem;
+      font-size: 1.05rem;
       letter-spacing: 0.22em;
       padding: 1rem 2.75rem;
       transition: background 0.4s ease, color 0.4s ease;
@@ -423,7 +426,7 @@
     }
 
     .contact-address {
-      font-size: 0.72rem;
+      font-size: 1.15rem;
       color: var(--clay);
       line-height: 2;
       opacity: 0.65;
@@ -442,7 +445,7 @@
       margin-bottom: 4rem;
     }
     @media (max-width: 767px) { .selects-head { flex-direction: column; gap: 0.5rem; } }
-    .selects-note { font-size: 0.72rem; color: var(--clay); letter-spacing: 0.04em; }
+    .selects-note { font-size: 1.15rem; color: var(--clay); letter-spacing: 0.04em; }
     .selects-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -461,11 +464,11 @@
     .select-name {
       font-family: var(--serif);
       font-weight: 300;
-      font-size: 1rem;
+      font-size: 1.4rem;
       line-height: 1.6;
       margin: 0.5rem 0 0.5rem;
     }
-    .select-desc { font-size: 0.72rem; color: var(--clay); line-height: 1.9; }
+    .select-desc { font-size: 1.15rem; color: var(--clay); line-height: 1.9; }
 
     /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
@@ -477,7 +480,7 @@
     }
 
     .footer-name {
-      font-size: 0.6rem;
+      font-size: 1rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--clay);
@@ -485,7 +488,7 @@
     }
 
     .footer-year {
-      font-size: 0.6rem;
+      font-size: 1rem;
       color: var(--clay);
       opacity: 0.35;
     }
@@ -514,7 +517,7 @@
       </p>
     </div>
     <div class="hero-foot reveal reveal-d3">
-      <span class="scroll-cue">往下了解</span>
+      <a href="#about" class="scroll-cue">往下了解</a>
       <span class="hero-meta">Taipei · 2024</span>
     </div>
   </section>
@@ -522,7 +525,7 @@
   <div class="rule"></div>
 
   <!-- ── Space Feature 1：落地鏡牆 ─────────────────────── -->
-  <section class="space">
+  <section id="about" class="space">
     <div class="space-grid">
       <div class="space-img ph-mirror reveal">
         <!-- 換成實際空間照：<img src="images/mirror.jpg" alt="整面落地鏡牆"> -->
