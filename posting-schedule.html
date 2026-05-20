@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>艾妮莎招租文案排程</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--wood:#D4B090;--gold:#C9A84C;
+  --dark:#2C2418;--mid:#9E896A;--light:#F0E8D8;
+  --white:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);color:var(--dark);-webkit-tap-highlight-color:transparent;}
+
+.hd{background:var(--dark);padding:1.2rem 1.2rem 1rem;text-align:center;}
+.hd-sub{font-size:0.6rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:0.4rem;text-transform:uppercase;}
+.hd h1{font-family:'Noto Serif TC',serif;font-size:1.5rem;font-weight:900;color:var(--bg);letter-spacing:0.15em;}
+.hd-note{font-size:0.65rem;color:rgba(255,255,255,0.4);margin-top:0.4rem;letter-spacing:0.05em;}
+
+/* Day 選單 */
+.day-tabs-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--dark);padding:0 0.8rem 0.8rem;border-bottom:2px solid var(--wood);}
+.day-tabs{display:flex;gap:0.4rem;min-width:max-content;}
+.day-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:6px;
+          color:rgba(255,255,255,0.55);font-size:0.65rem;font-weight:500;padding:0.4rem 0.65rem;cursor:pointer;
+          white-space:nowrap;transition:all 0.2s;letter-spacing:0.04em;}
+.day-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:700;}
+.day-btn.done{opacity:0.5;}
+
+/* 內容區 */
+.content{padding:1rem 1rem 3rem;}
+.day-info{background:var(--light);border-radius:10px;padding:0.8rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:1rem;}
+.day-num{font-family:'Noto Serif TC',serif;font-size:2rem;font-weight:900;color:var(--gold);line-height:1;}
+.day-meta{flex:1;}
+.day-date{font-size:0.68rem;color:var(--mid);letter-spacing:0.06em;}
+.day-theme{font-size:1rem;font-weight:700;color:var(--dark);margin-top:0.2rem;letter-spacing:0.04em;}
+
+/* 平台切換 */
+.platform-tabs{display:flex;gap:0.5rem;margin-bottom:0.8rem;}
+.plt-btn{flex:1;background:var(--light);border:1px solid var(--wood);border-radius:8px;
+          padding:0.5rem;font-size:0.72rem;font-weight:700;color:var(--mid);cursor:pointer;
+          text-align:center;transition:all 0.15s;}
+.plt-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+
+/* 文案卡 */
+.copy-card{background:var(--white);border-radius:12px;padding:1rem;box-shadow:0 1px 6px rgba(44,36,24,0.08);margin-bottom:0.8rem;}
+.copy-card-label{font-size:0.6rem;font-weight:700;letter-spacing:0.2em;color:var(--mid);text-transform:uppercase;margin-bottom:0.6rem;}
+.copy-text{font-size:0.82rem;line-height:1.9;color:var(--dark);white-space:pre-wrap;min-height:60px;}
+.copy-btn{display:flex;align-items:center;justify-content:center;gap:0.35rem;width:100%;
+           background:var(--dark);border:none;border-radius:8px;color:var(--bg);
+           font-size:0.75rem;font-weight:700;padding:0.65rem;margin-top:0.8rem;cursor:pointer;letter-spacing:0.06em;
+           transition:background 0.15s;}
+.copy-btn:active{background:var(--gold);color:var(--dark);}
+.copy-btn.copied{background:var(--gold);color:var(--dark);}
+
+/* 導航 */
+.nav-row{display:flex;gap:0.5rem;margin-top:1rem;}
+.nav-btn{flex:1;background:var(--light);border:1px solid var(--wood);border-radius:8px;
+          padding:0.65rem;font-size:0.8rem;font-weight:700;color:var(--dark);cursor:pointer;text-align:center;}
+.nav-btn:active{background:var(--wood);color:var(--white);}
+.nav-btn:disabled{opacity:0.3;cursor:default;}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-sub">AlunaStudio · 艾妮莎綜合療癒工作室</div>
+  <h1>招租文案排程</h1>
+  <div class="hd-note">5/17（六）—— 5/31（六）· 共 15 天</div>
+</div>
+
+<div class="day-tabs-wrap">
+  <div class="day-tabs" id="dayTabs"></div>
+</div>
+
+<div class="content">
+  <div class="day-info">
+    <div class="day-num" id="dayNum">01</div>
+    <div class="day-meta">
+      <div class="day-date" id="dayDate"></div>
+      <div class="day-theme" id="dayTheme"></div>
+    </div>
+  </div>
+
+  <div class="platform-tabs">
+    <button class="plt-btn active" onclick="switchPlatform('threads',this)">Threads</button>
+    <button class="plt-btn" onclick="switchPlatform('fb',this)">FB 社團</button>
+  </div>
+
+  <div class="copy-card" id="copyCard">
+    <div class="copy-card-label" id="cardLabel">Threads 文案</div>
+    <div class="copy-text" id="copyText"></div>
+    <button class="copy-btn" id="copyBtn" onclick="copyText()">📋 一鍵複製</button>
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" id="prevBtn" onclick="changeDay(-1)">← 前一天</button>
+    <button class="nav-btn" id="nextBtn" onclick="changeDay(1)">後一天 →</button>
+  </div>
+</div>
+
+<script>
+var DAYS = [
+  {
+    date:'5/17（六）', theme:'主招租宣告',
+    threads:'台北・新北投，有一個隱密的療癒空間開放承租了。\n木地板、落地鏡、15個頌缽，電子鎖自主入場。\n週一到日都可以，時租 NT$400 起。\n有在找上課場地的朋友，來私訊我',
+    fb:'【場地招租】新北投・隱密療癒工作室｜瑜珈/頌缽/個案皆適用\n\n大家好，我在新北投有一間約 8 坪的療癒工作室，現正開放給個體工作者承租。\n\n▌空間特色\n・北歐風原木地板 × 整面落地鏡牆\n・15個頌缽（無需自備）\n・獨立衛浴含淋浴\n・電子鎖自主入場，不需等人\n・分離式冷氣、投影機、Bose 音響\n\n▌費率\n平日 NT$400/h｜假日 NT$500/h｜最低 2 小時\n月租方案：8h/月 NT$2,700 起\n\n📍 台北市北投區中山路 45 號 2 樓之 5（新北投捷運步行可達）\n有興趣的朋友歡迎私訊，謝謝'
+  },
+  {
+    date:'5/18（日）', theme:'木地板 × 落地鏡',
+    threads:'工作室裡有一整面落地鏡牆。\n鏡子讓空間看起來大一倍，\n你能在裡面清楚看見自己的每一個動作。\n台北・新北投・出租中',
+    fb:'【空間特寫】整面落地鏡牆\n\n繼續介紹我在新北投的療癒工作室。\n空間最大的賣點之一是整面無縫落地鏡牆。\n對瑜珈老師：學員可以自我修正動作。\n對療癒師：鏡中映射讓空間感更寬敞、更有儀式感。\n配合北歐風原木地板，整體視覺效果很好。\n\n📍 台北市北投區中山路45號2樓之5\n⏰ 週一至週日 09:00–18:00\n💰 平日 NT$400/h 起，歡迎私訊詢問'
+  },
+  {
+    date:'5/19（一）', theme:'15個頌缽',
+    threads:'工作室裡有 15 個頌缽。\n不用自己搬，直接進來用。\n每一個都有自己的音頻。\n音療師的你，不用再煩惱器材了。',
+    fb:'【設備亮點】15個西藏頌缽，音療師免搬運\n\n空間內有 15 個大小不一的西藏頌缽，是整個工作室最核心的資產，市值近 NT$200,000。\n頌缽音療師來使用時，完全不需要自己搬運器材，所有頌缽都在，直接開始工作。\n\n📍 台北市北投區中山路45號2樓之5\n⏰ 週一至週日 09:00–18:00\n💰 時租 NT$400 起，月租方案另有優惠，歡迎私訊'
+  },
+  {
+    date:'5/20（二）', theme:'電子鎖自主入場',
+    threads:'預訂之後，直接進去就好。\n不用等人開門，不用配合任何人的時間。\n電子密碼鎖，收到密碼就是你的時間。',
+    fb:'【使用說明】電子鎖自主入場，完全自主\n\n預訂確認後，我會傳送當天的電子鎖密碼。\n你直接在約定時間到達，輸入密碼進場，開始使用。\n不需要等我、不需要配合房東時間、完整的私人使用感。\n\n⏰ 至少提前 24 小時預訂\n💰 平日 NT$400/h，最低 2 小時\n📍 台北市北投區中山路45號2樓之5，歡迎私訊'
+  },
+  {
+    date:'5/21（三）', theme:'獨立浴室',
+    threads:'上完課，不用急著走。\n工作室有獨立衛浴，含淋浴。\n在這裡整理好自己，再出發。',
+    fb:'【空間設備】獨立衛浴含淋浴，課後不用趕\n\n工作室有一間完整的獨立衛浴：洗手台、馬桶、淋浴設備。\n課後可以直接在這裡整理，不需要急著離開。\n白色大理石磁磚，整潔現代，你的學員或個案使用起來也很舒適。\n\n📍 台北市北投區中山路45號2樓之5\n💰 平日 NT$400/h 起，月租 NT$2,700 起，歡迎私訊'
+  },
+  {
+    date:'5/22（四）', theme:'月租方案',
+    threads:'如果你每週都需要固定空間，\n月租比散租划算很多。\n8小時/月 NT$2,700，\n等於每週2小時，固定下來。',
+    fb:'【方案說明】月租固定時段，最低 3 個月\n\n如果你有固定學員或個案，月租比每次散租划算很多：\n\n8小時/月  → NT$2,700（折合 NT$337/h）\n16小時/月 → NT$5,400（折合 NT$337/h）\n20小時/月 → NT$6,800（折合 NT$340/h）\n\n比散租時薪省約 15–16%。合約最短 3 個月，押金 1 個月。\n月租客可在指定置物格留放個人小件器材，不需要每次搬來搬去。\n\n有穩定課表的老師，歡迎私訊討論細節'
+  },
+  {
+    date:'5/23（五）', theme:'目標：瑜珈老師',
+    threads:'給台北的瑜珈老師：\n有整面落地鏡的空間，\n有瑜珈椅、瑜珈磚、瑜珈枕，\n新北投，週一到日都有空。',
+    fb:'【招租對象】瑜珈老師・皮拉提斯老師\n\n工作室為瑜珈課程準備的設備：\n・整面落地鏡牆（學員可自我修正動作）\n・瑜珈椅 4 張、瑜珈磚（軟木+EVA）多個\n・瑜珈枕 4 個、瑜珈毯 4 條、瑜珈繩、彈力繩\n\n靜態課程最多 6–9 人，動態課程建議 2–4 人，適合小班精品課。\n\n📍 台北市北投區中山路45號2樓之5\n⏰ 週一至週日 09:00–18:00\n💰 平日 NT$400/h，月租 NT$2,700起，歡迎私訊'
+  },
+  {
+    date:'5/24（六）', theme:'目標：頌缽音療師',
+    threads:'給頌缽音療師：\n15 個頌缽，你直接來用。\n新北投，隱密，有獨立衛浴。\n搬運的問題，你不用管了。',
+    fb:'【招租對象】頌缽音療師・聲音療癒工作者\n\n工作室裡有 15 個西藏頌缽，租借空間就可直接使用。\n空間安靜隱密，不受外部噪音干擾，適合：\n・頌缽個案（一對一）\n・頌缽小團體療癒（最多 6–9 人，有禪宗坐墊）\n・頌缽 + 冥想課程組合\n\nBose 音響、投影機可搭配引導冥想使用。\n\n📍 台北市北投區中山路45號2樓之5\n💰 時租 NT$400 起，月租方案另有優惠，歡迎私訊'
+  },
+  {
+    date:'5/25（日）', theme:'目標：塔羅師',
+    threads:'你的個案，值得一個安靜隱密的空間。\n不是咖啡廳，不是開放辦公室。\n是屬於你和你客人的那兩個小時。',
+    fb:'【招租對象】塔羅師・占星師・身心靈諮詢師\n\n如果你的工作需要安靜、隱密、讓客人感到安全的空間：\n・集合住宅 2 樓，非商業大樓，隱密感強\n・電子鎖入場，不需要在公共區域等待\n・獨立衛浴，客人使用起來完整\n・空間氛圍溫暖，不商業化\n\n時租最低 2 小時，一次個案通常 1.5–2 小時，彈性適合你。\n\n📍 台北市北投區中山路45號2樓之5\n💰 平日 NT$400/h，歡迎私訊詢問'
+  },
+  {
+    date:'5/26（一）', theme:'空中環 × 空中繩',
+    threads:'工作室裡有空中環和空中繩。\n台北很少見。\n有需要這個設備的老師，來這裡。',
+    fb:'【設備亮點】空中環 + 空中繩，台北少有\n\n空間天花板上有空中環（aerial hoop）和空中繩（aerial rope）。\n適合空中瑜珈老師、空中舞蹈老師、或想嘗試空中體驗的個人。\n\n⚠️ 使用前需簽署安全免責同意書。\n空間最多容納 2–4 人做動態活動。\n\n📍 台北市北投區中山路45號2樓之5\n⏰ 週一至週日 09:00–18:00\n💰 平日 NT$400/h，最低 2 小時，歡迎私訊'
+  },
+  {
+    date:'5/27（二）', theme:'美業工作者',
+    threads:'給美業工作者：\n鏡牆、獨立衛浴、安靜私密。\n你的客人不會碰到任何不相干的人。\n一對一，就是一對一。',
+    fb:'【招租對象】美業工作者・一對一接客\n\n工作室適合芳療師、精油按摩、美容護膚、頭皮護理等工作者：\n・整面落地鏡牆\n・獨立衛浴，客人前後可整理\n・隱密私人入口，不在走廊遇到其他人\n・可攜式按摩床已備，無需自備\n\n每次最低 2 小時，月租方案更適合有固定客人的你。\n\n📍 台北市北投區中山路45號2樓之5\n💰 平日 NT$400/h，月租 NT$2,700起，歡迎私訊'
+  },
+  {
+    date:'5/28（三）', theme:'時間彈性',
+    threads:'週一到週日，09:00 到 18:00。\n最少 2 小時，提前 24 小時預訂。\n你的課表怎麼排，空間就怎麼配合。',
+    fb:'【使用說明】時間彈性，你說了算\n\n工作室全週開放（週一至週日），可用時段 09:00–18:00。\n\n▌散租規則\n最低 2 小時｜提前 24 小時預訂｜預付\n使用前後各有 15 分鐘緩衝時間\n\n▌取消規則\n24小時前取消 → 全額退款\n12小時前取消 → 退50%\n12小時內取消 → 不退款\n\n有任何問題歡迎私訊詢問'
+  },
+  {
+    date:'5/29（四）', theme:'問與答 FAQ',
+    threads:'Q：最少租幾小時？A：2小時\nQ：可以帶學員嗎？A：最多6–9人\nQ：怎麼預訂？A：私訊我',
+    fb:'【常見問題 FAQ】整理給大家\n\nQ：地點在哪？\nA：台北市北投區中山路45號2樓之5，新北投捷運步行可達。\n\nQ：最少要租幾小時？\nA：最低 2 小時。\n\nQ：可以帶學員嗎？\nA：可以。靜態活動最多 6–9 人，動態活動建議 2–4 人。\n\nQ：費用怎麼算？\nA：平日 NT$400/h，假日 NT$500/h。遲到的時間從時數內扣，不延長。\n\nQ：怎麼預訂？\nA：直接私訊，說明想預訂的日期和時段，確認後告知付款方式。\n\n還有其他問題歡迎私訊'
+  },
+  {
+    date:'5/30（五）', theme:'倒數提醒',
+    threads:'明天最後一天。\n6月份如果還有需要空間，\n現在可以私訊了。\n月租三個月合約，押金一個月。',
+    fb:'【提醒】6月空間有空檔，月租客優先確認\n\n招租貼文系列接近尾聲，來提醒一下。\n6月份時段還有空缺，如果你一直在考慮，現在是私訊的好時機。\n\n可以直接把你的狀況告訴我：\n・每週大概需要幾小時\n・固定時段大概幾點到幾點\n・你做的是什麼類型的工作\n\n我來判斷哪個方案最適合你。\n\n📍 台北市北投區中山路45號2樓之5\n💰 月租 NT$2,700起・最低三個月，歡迎私訊'
+  },
+  {
+    date:'5/31（六）', theme:'最後收尾',
+    threads:'艾妮莎在新北投等你。\n有屬於你的課，有屬於你的空間。\n私訊我，我們來聊。',
+    fb:'【最終收尾】謝謝大家這幾天的關注\n\n這是招租貼文系列的最後一篇，感謝這幾天所有私訊詢問和給予鼓勵的朋友。\n如果你還沒有私訊、但一直有在考慮，隨時都可以找我。\n工作室不會因為這個系列結束就停止招租。\n\n▌工作室基本資料\n📍 台北市北投區中山路45號2樓之5\n⏰ 週一至週日 09:00–18:00\n💰 平日 NT$400/h｜月租 NT$2,700起\n\nAlunaStudio 艾妮莎綜合療癒工作室'
+  }
+];
+
+var currentDay = 0;
+var currentPlatform = 'threads';
+
+function init() {
+  var tabs = document.getElementById('dayTabs');
+  DAYS.forEach(function(d, i) {
+    var btn = document.createElement('button');
+    btn.className = 'day-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = 'Day ' + (i+1).toString().padStart(2,'0');
+    btn.onclick = (function(idx){return function(){selectDay(idx);};})(i);
+    tabs.appendChild(btn);
+  });
+  renderDay(0);
+}
+
+function selectDay(idx) {
+  currentDay = idx;
+  document.querySelectorAll('.day-btn').forEach(function(b,i){
+    b.classList.toggle('active', i === idx);
+  });
+  renderDay(idx);
+}
+
+function renderDay(idx) {
+  var d = DAYS[idx];
+  document.getElementById('dayNum').textContent = (idx+1).toString().padStart(2,'0');
+  document.getElementById('dayDate').textContent = d.date;
+  document.getElementById('dayTheme').textContent = d.theme;
+  renderContent();
+  document.getElementById('prevBtn').disabled = idx === 0;
+  document.getElementById('nextBtn').disabled = idx === DAYS.length - 1;
+  document.getElementById('copyBtn').textContent = '📋 一鍵複製';
+  document.getElementById('copyBtn').classList.remove('copied');
+}
+
+function renderContent() {
+  var d = DAYS[currentDay];
+  var text = currentPlatform === 'threads' ? d.threads : d.fb;
+  var label = currentPlatform === 'threads' ? 'Threads 文案' : 'FB 社團文案';
+  document.getElementById('cardLabel').textContent = label;
+  document.getElementById('copyText').textContent = text;
+}
+
+function switchPlatform(platform, btn) {
+  currentPlatform = platform;
+  document.querySelectorAll('.plt-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderContent();
+  document.getElementById('copyBtn').textContent = '📋 一鍵複製';
+  document.getElementById('copyBtn').classList.remove('copied');
+}
+
+function copyText() {
+  var text = document.getElementById('copyText').textContent;
+  var btn = document.getElementById('copyBtn');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function(){
+      btn.textContent = '✅ 已複製！';
+      btn.classList.add('copied');
+      setTimeout(function(){btn.textContent='📋 一鍵複製';btn.classList.remove('copied');}, 2000);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✅ 已複製！';
+    btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='📋 一鍵複製';btn.classList.remove('copied');}, 2000);
+  }
+}
+
+function changeDay(delta) {
+  var next = currentDay + delta;
+  if (next >= 0 && next < DAYS.length) selectDay(next);
+}
+
+init();
+</script>
+</body>
+</html>
