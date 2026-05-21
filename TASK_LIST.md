@@ -98,7 +98,7 @@
 | FE3 | `.ph-bowls` → 換成真實照片 `images/bowls.jpg` | [ ] |
 | FE4 | `.ph-bath` → 換成真實照片 `images/bath.jpg` | [ ] |
 | FE5 | 加入「空間選物」區段（編輯感，非電商）：空間物件 / 日常香氛 / 生活好食 | [x] |
-| FE6 | 部署至 GitHub Pages | [ ] |
+| FE6 | 部署至 GitHub Pages | [x] |
 
 ---
 
