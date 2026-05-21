@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AlunaStudio 艾妮莎綜合療癒工作室｜台北北投</title>
-  <meta name="description" content="台北北投，給頌缽師、療癒師與創作者的私人工作室。整面落地鏡、15 顆頌缽、電子鎖自主入場。有些工作，需要比咖啡廳更安靜的地方。" />
+  <meta name="description" content="台北北投，給頌缽師、療癒師與創作者的私人工作室。整面落地鏡、15 顆頌缽、電子鎖自主入場。有些工作，需要一個不被打擾的地方。" />
   <meta property="og:title" content="AlunaStudio 艾妮莎綜合療癒工作室" />
-  <meta property="og:description" content="有些工作，需要比咖啡廳更安靜的地方。台北北投，週一至日 09:00–18:00。" />
+  <meta property="og:description" content="有些工作，需要一個不被打擾的地方。台北北投，一間可以安靜開始的空間。週一至日 09:00–18:00。" />
   <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -202,7 +202,7 @@
     .statement-text span {
       display: block;
       color: var(--clay);
-      font-size: 0.9em;
+      font-size: 0.7em;
       margin-top: 0.4rem;
     }
 
@@ -302,6 +302,12 @@
       line-height: 1.8;
       color: rgba(250, 250, 247, 0.82);
     }
+    .philosophy-quote {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(250, 250, 247, 0.45);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
 
     /* ─── SCENARIOS ──────────────────────────────────────── */
     .scenarios {
@@ -310,40 +316,45 @@
     }
     .scenarios-inner { max-width: 680px; margin: 0 auto; }
     .scenarios-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      text-transform: none;
       color: var(--clay);
-      opacity: 0.55;
+      opacity: 0.75;
       margin-bottom: 4rem;
     }
     .scenario {
       display: grid;
-      grid-template-columns: 7.5rem 1fr;
-      gap: 2rem;
-      align-items: baseline;
-      padding: 1.8rem 0;
+      grid-template-columns: 12rem 1fr;
+      gap: 3rem;
+      align-items: start;
+      padding: 2.2rem 0;
       border-bottom: 1px solid var(--clay-20);
     }
     .scenario:first-of-type { border-top: 1px solid var(--clay-20); }
     .scenario-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.75;
-      padding-top: 0.25rem;
-    }
-    .scenario-text {
       font-family: var(--serif);
+      font-size: 1.15rem;
       font-weight: 300;
-      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-      line-height: 1.75;
       color: var(--bark);
+      line-height: 1.5;
+      padding-top: 0.15rem;
+    }
+    .scenario-body { display: flex; flex-direction: column; gap: 0.6rem; }
+    .scenario-text {
+      font-size: clamp(0.9rem, 1.8vw, 1rem);
+      line-height: 1.8;
+      color: var(--clay);
+      font-weight: 300;
+    }
+    .scenario-sub {
+      font-size: clamp(0.8rem, 1.5vw, 0.88rem);
+      line-height: 1.75;
+      color: var(--clay);
+      opacity: 0.6;
     }
     @media (max-width: 480px) {
-      .scenario { grid-template-columns: 1fr; gap: 0.4rem; }
-      .scenario-tag { font-size: 0.55rem; }
+      .scenario { grid-template-columns: 1fr; gap: 0.6rem; }
     }
 
     /* ─── PRICING ────────────────────────────────────────── */
@@ -376,6 +387,7 @@
       margin-bottom: 0.5rem;
     }
     .plan-note { font-size: 1rem; color: var(--clay); line-height: 1.9; }
+    .plan-detail { font-size: 0.85rem; color: var(--clay); opacity: 0.6; line-height: 1.8; margin-top: 0.6rem; }
     .plan-price { text-align: right; }
     .plan-amount {
       font-family: var(--serif);
@@ -426,6 +438,7 @@
     }
     @media (max-width: 767px) { .selects-head { flex-direction: column; gap: 0.5rem; } }
     .selects-note { font-size: 1.05rem; color: var(--clay); letter-spacing: 0.04em; }
+    .selects-intro { font-size: 0.95rem; color: var(--clay); line-height: 1.9; margin: 1.5rem 0 3rem; opacity: 0.75; }
     .selects-grid {
       display: flex;
       gap: 2.5rem;
@@ -501,6 +514,13 @@
       text-align: center;
     }
     .contact-inner { max-width: 520px; margin: 0 auto; }
+    .contact-manifesto {
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      color: var(--clay);
+      line-height: 2;
+      opacity: 0.65;
+      margin-bottom: 2rem;
+    }
     .contact-heading {
       font-family: var(--serif);
       font-weight: 300;
@@ -583,12 +603,11 @@
       <p class="hero-eyebrow reveal">台北北投 · Beitou, Taipei</p>
       <h1 class="hero-title reveal reveal-d1">
         有些工作，<br />
-        需要比咖啡廳<br />
-        更安靜的地方。
+        需要一個不被打擾的地方。
       </h1>
       <p class="hero-tagline reveal reveal-d2">
-        你帶自己來。<br />
-        這裡已經準備好了。
+        台北北投，一間可以安靜開始的空間。<br />
+        你帶自己來，其他的，這裡已經準備好。
       </p>
     </div>
     <div class="hero-foot reveal reveal-d3">
@@ -605,8 +624,8 @@
       不是咖啡廳。
     </div>
     <div class="statement-text reveal reveal-d2" style="margin-top: 2rem;">
-      是可以讓你慢下來，<br />
-      然後真正開始的地方。
+      這裡是一間給個案、課程、創作與安靜工作使用的空間。<br />
+      讓你不用管理環境，只需要專心進入自己的工作。
       <span>ALUNASTUDIO，台北北投。週一至日，09:00–18:00。</span>
     </div>
   </section>
@@ -622,18 +641,21 @@
       <div class="space-copy reveal reveal-d2">
         <p class="label">空間</p>
         <h2 class="space-heading">
-          你的個案<br />
-          有整面光。
+          整面落地鏡牆，<br />
+          讓身體、姿態與空間都被看見。
         </h2>
         <div class="gold-mark"></div>
         <p class="space-body">
-          整面落地鏡牆，原木色地板。<br />
-          近 8 坪，全部都是你的。
+          適合瑜珈、伸展、動作引導、拍攝、小班課與一對一課程。
         </p>
         <p class="space-body">
-          台北北投，集合住宅 2 樓。<br />
+          8 坪小空間，原木色地板與大片鏡面，<br />
+          讓空間保有明亮、安定且舒展的延伸感。
+        </p>
+        <p class="space-body">
+          位於新北投地熱谷旁，<br />
           電子鎖自主入場，<br />
-          沒有人等你，也沒有人打擾你。
+          保留一段不被打擾的使用時間。
         </p>
       </div>
     </div>
@@ -650,23 +672,21 @@
       <div class="space-copy reveal">
         <p class="label">頌缽</p>
         <h2 class="space-heading">
-          你不需要<br />
-          帶任何東西來。
+          缽都在這裡，<br />
+          你只需要帶著你的個案來。
         </h2>
         <div class="gold-mark"></div>
         <p class="space-body">
-          15 顆。<br />
-          大腳缽、七脈輪缽、滿月缽、雙耳缽。<br />
-          每一顆都有自己的頻率。
+          15 顆頌缽常設於空間內，包含大腳缽、七脈輪缽、滿月缽、靈感缽等。<br />
+          適合頌缽音療、一對一療癒、靜心課程與小型聲音工作坊。
         </p>
         <p class="space-body">
-          你只需要帶你的個案，<br />
-          和你的意圖。<br />
-          其他的，這裡都準備好了。
+          不用搬器材，不用重新佈置。<br />
+          你可以直接開始工作。
         </p>
         <p class="space-body" style="opacity: 0.6; font-size: 0.9rem; margin-top: 1.5rem;">
-          市值近 NT$200,000 的完整頌缽收藏。<br />
-          台北少有。
+          市值近 NT$500,000 的完整頌缽收藏組合。<br />
+          不藏私分享，台北少有。
         </p>
       </div>
     </div>
@@ -683,24 +703,34 @@
       <div class="space-copy reveal reveal-d2">
         <p class="label">完整設備</p>
         <h2 class="space-heading">
-          課後不需要<br />
-          急著走。
+          課後可以整理自己，<br />
+          不需要急著離開。
         </h2>
         <div class="gold-mark"></div>
         <p class="space-body">
-          獨立衛浴，含淋浴、智慧馬桶、洗手台。<br />
-          你可以在這裡整理自己，<br />
-          然後才離開。
+          空間內含獨立衛浴、免治馬桶與內外洗手台。
+        </p>
+        <p class="space-body">
+          課程或工作結束後，<br />
+          也能保留一段整理與轉換狀態的時間，<br />
+          再慢慢離開空間。
         </p>
         <ul class="equip-list">
           <li class="equip-item">Bose 音響</li>
-          <li class="equip-item">天花板投影機</li>
+          <li class="equip-item">投影機／布幕</li>
           <li class="equip-item">分離式冷氣</li>
           <li class="equip-item">空中環</li>
           <li class="equip-item">空中繩</li>
+          <li class="equip-item">擴香機</li>
+          <li class="equip-item">按摩床</li>
+          <li class="equip-item">熱水壺與飲水杯</li>
           <li class="equip-item">自然採光</li>
           <li class="equip-item">柔和暖光燈</li>
         </ul>
+        <p class="space-body" style="opacity: 0.65; font-size: 0.9rem; margin-top: 1.5rem; line-height: 1.9;">
+          空間可依需求進行簡單熏香與氣味調整，<br />
+          讓工作、課程與停留狀態更容易慢慢沉下來。
+        </p>
       </div>
     </div>
   </section>
@@ -711,27 +741,43 @@
       <p class="philosophy-label reveal">空間哲學</p>
 
       <div class="philosophy-block reveal reveal-d1">
-        <p class="philosophy-q">關於「安靜」</p>
+        <p class="philosophy-q">關於安靜</p>
+        <p class="philosophy-a philosophy-quote">
+          《太上清淨經》云：<br />
+          「清者濁之源，動者靜之基。」
+        </p>
         <p class="philosophy-a">
-          安靜，不是沒有聲音。<br />
-          是不需要管理自己的能量。
+          靜，從來不是與世界切斷關係。<br /><br />
+          而是一個人進入空間後，<br />
+          不再需要持續消耗自己去適應環境。<br /><br />
+          安靜，<br />
+          不是沒有聲音，<br />
+          而是終於可以不用一直管理自己的能量。
         </p>
       </div>
 
       <div class="philosophy-block reveal reveal-d2">
-        <p class="philosophy-q">關於「停留」</p>
+        <p class="philosophy-q">關於停留</p>
         <p class="philosophy-a">
-          課後不需要急著走。<br />
-          停留，是讓事情沉澱的方式。
+          停留，不是停滯。<br /><br />
+          而是留一段空白，<br />
+          讓自己重新看見事情本來的樣子。<br /><br />
+          《心經》所說的「照見」，<br />
+          不是逃避世界，<br />
+          而是不再被當下的執念完全牽動。
         </p>
       </div>
 
       <div class="philosophy-block reveal reveal-d3">
-        <p class="philosophy-q">關於「療癒空間」</p>
+        <p class="philosophy-q">關於療癒空間</p>
         <p class="philosophy-a">
-          真正的療癒空間，<br />
-          讓人安全到願意打開自己。<br />
-          不是氛圍佈置，是容器。
+          真正好的空間，<br />
+          不會一直告訴你它多療癒。<br /><br />
+          它只是自然地讓人慢慢安定下來。<br /><br />
+          如《論語》所言：<br />
+          「君子欲訥於言，而敏於行。」<br /><br />
+          真正有力量的存在，<br />
+          往往不喧嘩。
         </p>
       </div>
     </div>
@@ -740,31 +786,56 @@
   <!-- ── Scenarios ──────────────────────────────────────── -->
   <section class="scenarios">
     <div class="scenarios-inner">
-      <p class="scenarios-label reveal">這裡適合你</p>
+      <p class="scenarios-label reveal">這裡適合你，如果你需要的不是熱鬧，而是穩定。</p>
 
       <div class="scenario reveal reveal-d1">
-        <span class="scenario-tag">頌缽師</span>
-        <p class="scenario-text">缽都在這裡。你只需要帶自己來。</p>
+        <span class="scenario-tag">頌缽／聲音工作者</span>
+        <div class="scenario-body">
+          <p class="scenario-text">15 顆頌缽常設於空間內，不需搬運大型器材即可開始工作。</p>
+          <p class="scenario-sub">適合小型音療、聲音冥想、個人引導與深度放鬆課程。</p>
+        </div>
       </div>
       <div class="scenario reveal reveal-d2">
-        <span class="scenario-tag">瑜珈老師</span>
-        <p class="scenario-text">整面落地鏡。你的學員可以清楚看見自己。</p>
+        <span class="scenario-tag">瑜珈／身體工作者</span>
+        <div class="scenario-body">
+          <p class="scenario-text">整面落地鏡牆、原木地板與柔和光線，適合一對一、小班課與身體覺察練習。</p>
+          <p class="scenario-sub">包含瑜珈、皮拉提斯、伸展、呼吸、動作引導等低至中強度課程。</p>
+        </div>
       </div>
       <div class="scenario reveal reveal-d3">
-        <span class="scenario-tag">療癒師</span>
-        <p class="scenario-text">隱密，私人。你的個案不會碰到任何不相干的人。</p>
+        <span class="scenario-tag">深度陪伴與個案工作者</span>
+        <div class="scenario-body">
+          <p class="scenario-text">隱密、安靜且具獨立感的空間狀態，適合需要高度安全感的一對一工作。</p>
+          <p class="scenario-sub">包含身心陪伴、諮詢、對談、療癒與長時間個案工作。</p>
+        </div>
       </div>
       <div class="scenario reveal reveal-d4">
-        <span class="scenario-tag">塔羅・占星</span>
-        <p class="scenario-text">你的個案，值得一個安靜而安全的地方。</p>
+        <span class="scenario-tag">低空環／空中身體練習者</span>
+        <div class="scenario-body">
+          <p class="scenario-text">空間設有低空環與空中瑜珈掛點，適合低人數教學與個人身體練習。</p>
+          <p class="scenario-sub">使用前需完成安全確認與簽署。</p>
+        </div>
       </div>
       <div class="scenario reveal reveal-d5">
-        <span class="scenario-tag">空中環・繩</span>
-        <p class="scenario-text">台北少有，這裡都有。使用前簽署同意書即可。</p>
+        <span class="scenario-tag">攝影／內容創作者</span>
+        <div class="scenario-body">
+          <p class="scenario-text">自然採光、鏡牆與乾淨留白的空間感，適合形象拍攝、品牌內容、小型錄製與安靜創作。</p>
+          <p class="scenario-sub">適合低設備、低干擾的拍攝工作型態。</p>
+        </div>
       </div>
       <div class="scenario reveal reveal-d6">
-        <span class="scenario-tag">美業・創作者</span>
-        <p class="scenario-text">鏡牆、自然採光、獨立衛浴——你的工作值得這樣的背景。</p>
+        <span class="scenario-tag">小型工作坊與預約制活動</span>
+        <div class="scenario-body">
+          <p class="scenario-text">適合低人數、深度交流型的工作坊與聚會。</p>
+          <p class="scenario-sub">包含閱讀分享、品牌體驗、選物展示、靜態交流與預約制活動。較適合「停留型」而非大量流動的人群活動。</p>
+        </div>
+      </div>
+      <div class="scenario reveal reveal-d7">
+        <span class="scenario-tag">需要長時間停留的人</span>
+        <div class="scenario-body">
+          <p class="scenario-text">有些工作，需要的不只是場地。</p>
+          <p class="scenario-sub">而是一個能安心停留、不用持續耗損自己的地方。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -776,27 +847,28 @@
         <div class="reveal">
           <p class="label" style="margin-bottom: 1.5rem;">使用方案</p>
           <h2 class="pricing-title">
-            依你的<br />節奏使用。
+            按照自己的節奏使用空間。
           </h2>
         </div>
         <p class="pricing-desc reveal reveal-d1">
-          偶爾需要一個安靜的下午，<br />
-          或是已有固定課表——<br />
-          都有對應的方式。
+          不論是短暫使用、固定授課，<br />
+          或需要長時間停留的工作狀態，<br />
+          都能找到適合的安排方式。
         </p>
       </div>
 
       <div class="plan reveal">
         <div>
-          <p class="plan-name">時租</p>
+          <p class="plan-name">時租方案</p>
           <p class="plan-note">
-            最低 2 小時・提前 24 小時預訂・預付<br />
-            假日 NT$500 / h
+            適合單次個案、一對一課程、短時間拍攝與臨時使用。<br />
+            保留足夠的彈性，讓工作與停留不需要過度壓縮。
           </p>
+          <p class="plan-detail">— 最低租借 2 小時　— 需提前 24 小時預約</p>
         </div>
         <div class="plan-price">
           <p class="plan-amount">NT$400<span style="font-size:0.7em; color:var(--clay);">/h</span></p>
-          <p class="plan-unit">平日</p>
+          <p class="plan-unit">平日・假日 NT$500</p>
         </div>
       </div>
 
@@ -804,14 +876,14 @@
         <div>
           <p class="plan-name">半日方案</p>
           <p class="plan-note">
-            上午場 09:00–13:00（4h）NT$1,500<br />
-            下午場 13:00–18:00（5h）NT$1,800<br />
-            提前 48 小時預訂
+            適合工作坊、品牌拍攝、小型聚會與長時間課程使用。<br />
+            一次保留完整上午或下午時段，不需壓縮準備、課程與收場時間。
           </p>
+          <p class="plan-detail">上午場｜09:00–13:00　下午場｜14:00–18:00</p>
         </div>
         <div class="plan-price">
           <p class="plan-amount">NT$1,500<span style="font-size:0.7em; color:var(--clay);">起</span></p>
-          <p class="plan-unit">平日</p>
+          <p class="plan-unit">平日・假日 NT$1,800</p>
         </div>
       </div>
 
@@ -819,14 +891,30 @@
         <div>
           <p class="plan-name">月租固定時段</p>
           <p class="plan-note">
-            8h / 月 NT$2,700・16h / 月 NT$5,400・20h / 月 NT$6,800<br />
-            最低合約 3 個月・押金 1 個月<br />
-            月租客可在指定置物格留放個人器材
+            適合固定授課、長期個案與規律使用者。<br />
+            建立穩定的工作節奏，也讓熟悉的空間感慢慢累積下來。
           </p>
+          <p class="plan-detail">— 時數越多，平均租借單價越低　— 可安排固定置物空間　— 穩定租借者可優先保留固定時段</p>
+          <p class="plan-detail" style="margin-top:0.4rem;">8h｜NT$2,700　16h｜NT$5,400　20h｜NT$6,800</p>
         </div>
         <div class="plan-price">
           <p class="plan-amount">NT$2,700<span style="font-size:0.7em; color:var(--clay);">起</span></p>
           <p class="plan-unit">每月 8h</p>
+        </div>
+      </div>
+
+      <div class="plan reveal reveal-d3" style="border-bottom: none;">
+        <div>
+          <p class="plan-name">設備架設協助</p>
+          <p class="plan-note">
+            若為穩定租借者，且有活動或課程需求，<br />
+            可提前預約空中環、掛布等設備架設服務，抵達後即可直接開始使用。
+          </p>
+          <p class="plan-detail">— 需提前預約　— NT$100 起，依需求調整</p>
+        </div>
+        <div class="plan-price">
+          <p class="plan-amount" style="font-size:1.2rem;">NT$100<span style="font-size:0.7em; color:var(--clay);">起</span></p>
+          <p class="plan-unit">依需求調整</p>
         </div>
       </div>
     </div>
@@ -841,28 +929,70 @@
       </div>
 
       <div class="faq-item reveal">
-        <p class="faq-q">可以先來看場嗎？</p>
-        <p class="faq-a">可以。LINE 私訊說一下你想做什麼用途，我們約個時間，你來感受一下空間。</p>
+        <p class="faq-q">可以先來看看嗎？</p>
+        <p class="faq-a">可以。先私訊告訴我們你想做什麼用途、希望的時間，以及大約需要多久。如果時間適合，可以安排你先來感受一下空間。</p>
       </div>
       <div class="faq-item reveal">
-        <p class="faq-q">時租和月租，怎麼選？</p>
-        <p class="faq-a">如果你每週固定有課，月租折合時薪更低，也可以有指定置物格。偶爾需要空間，時租更彈性。</p>
+        <p class="faq-q">這裡適合哪些使用方式？</p>
+        <p class="faq-a">
+          目前以一對一個案、瑜珈與身體工作、頌缽與聲音療癒、塔羅占星諮詢、小型課程、品牌拍攝、安靜工作與創作等小型預約制使用為主。<br />
+          這裡不是共享空間，也不是對外開放式場地。更適合需要隱私、穩定感與專注狀態的工作。
+        </p>
       </div>
       <div class="faq-item reveal">
         <p class="faq-q">可以帶個案進來嗎？</p>
-        <p class="faq-a">當然可以。電子鎖入場，外面不會有人知道誰進出。一對一的隱私有保障。</p>
+        <p class="faq-a">可以。電子鎖進場，外部不會有人知道誰進出。空間一次僅接待單組使用者，能保有基本隱私與安靜感。</p>
       </div>
       <div class="faq-item reveal">
-        <p class="faq-q">交通怎麼去？停車呢？</p>
-        <p class="faq-a">新北投捷運站出口步行可達。附近有路邊停車格，假日建議搭捷運。確認預約後會提供詳細地址與入場說明。</p>
+        <p class="faq-q">可以拍攝嗎？</p>
+        <p class="faq-a">可以。空間適合自然光拍攝、品牌形象、個人創作與小型內容製作。若為商業拍攝、多人團隊或特殊需求，請提前私訊討論。</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">空間內有什麼設備？</p>
+        <p class="faq-a">整面落地鏡、原木地板、自然採光、Bose 音響、投影設備、頌缽器材、空中環與空中瑜珈掛點、獨立衛浴與淋浴。部分器材需事前告知用途後使用。</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">可以使用頌缽嗎？</p>
+        <p class="faq-a">可以。空間內常設頌缽器材，適合音療、靜心與小型聲音工作。若需要特定配置或進階使用，也可以提前討論。</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">可以使用空中環或空中瑜珈嗎？</p>
+        <p class="faq-a">可以。空間已有設置掛點。首次使用需提前告知，並完成基本確認與使用同意。</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">時租和月租怎麼選？</p>
+        <p class="faq-a">
+          偶爾需要安靜空間、不固定接案、短時間拍攝或個案，比較適合時租。<br />
+          每週固定授課、有穩定個案、需要長期使用，月租方案會更適合，時薪也會更低。部分固定租用者可討論置物安排。
+        </p>
       </div>
       <div class="faq-item reveal">
         <p class="faq-q">可以帶外食進來嗎？</p>
-        <p class="faq-a">輕食、飲料可以。禁止使用明火與瓦斯爐具。使用後請自行清理。</p>
+        <p class="faq-a">輕食與飲品可以。請避免氣味過重、油煙型食物，以及明火器具。使用後請協助恢復整潔。</p>
       </div>
       <div class="faq-item reveal">
         <p class="faq-q">如果需要延長時間？</p>
-        <p class="faq-a">提前告知即可確認。若後段無人預約，通常可以彈性延長，超時費 NT$300 / 30 分鐘。</p>
+        <p class="faq-a">若後段沒有其他預約，通常可以彈性延長。請提前告知，超時費用將依方案另外計算。</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">可以提早進場準備嗎？</p>
+        <p class="faq-a">可提前 10 分鐘進場。若需要更長的佈置或準備時間，請在預約時一併告知。</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">使用後需要整理空間嗎？</p>
+        <p class="faq-a">需要。離開前請協助恢復基本狀態：包含器材歸位、垃圾整理、燈光與冷氣關閉等。</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">可以舉辦活動、市集或深度合作嗎？</p>
+        <p class="faq-a">可以討論。除了目前的空間租借外，也有其他合作形式，適合主題型市集、品牌策展、香氛療癒聚會、小型工作坊等。這類合作會依內容、規模與空間氣質另外討論，目前暫不提供公開制式方案。</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">交通方便嗎？</p>
+        <p class="faq-a">近新北投捷運站，步行可達。附近有路邊停車格與停車場。確認預約後，會提供詳細地址與入場方式。</p>
+      </div>
+      <div class="faq-item reveal">
+        <p class="faq-q">這裡適合大型聚會嗎？</p>
+        <p class="faq-a">不太適合。ALUNASTUDIO 更偏向安靜、低人數、可沉浸的使用方式。我們不追求大量人流，而是希望每個進來的人，都能真正進入自己的狀態。</p>
       </div>
     </div>
   </section>
@@ -874,24 +1004,25 @@
         <p class="label">空間選物</p>
         <p class="selects-note">有些東西，因為放在這裡才特別。</p>
       </div>
+      <p class="selects-intro reveal">
+        這裡的選物不是陳列，而是空間氣味的一部分。<br />
+        每一件物品，都必須能讓人更安靜、更願意停留，或更靠近生活。
+      </p>
       <div class="selects-grid">
         <article class="select-item reveal reveal-d1">
           <div class="select-img ph-obj"></div>
           <p class="label" style="margin-bottom: 0.5rem;">空間物件</p>
-          <h3 class="select-name">讓空間開口說話的物件</h3>
-          <p class="select-desc">每一個擺在這裡的東西，<br>都是刻意挑選的。</p>
+          <h3 class="select-name">讓空間開始有自己的性格。</h3>
         </article>
         <article class="select-item reveal reveal-d2">
           <div class="select-img ph-scent"></div>
-          <p class="label" style="margin-bottom: 0.5rem;">日常香氛</p>
-          <h3 class="select-name">聞到就能放下的氣味</h3>
-          <p class="select-desc">進門的第一口空氣，<br>決定了整堂課的狀態。</p>
+          <p class="label" style="margin-bottom: 0.5rem;">日常香氣</p>
+          <h3 class="select-name">進門第一口空氣，決定一堂課的狀態。</h3>
         </article>
         <article class="select-item reveal reveal-d3">
           <div class="select-img ph-food"></div>
           <p class="label" style="margin-bottom: 0.5rem;">生活好食</p>
-          <h3 class="select-name">工作之後，好好吃點東西</h3>
-          <p class="select-desc">精選讓人想帶回家的<br>食物與茶。</p>
+          <h3 class="select-name">工作之後，可以慢慢吃點東西再離開。</h3>
         </article>
       </div>
     </div>
@@ -904,17 +1035,16 @@
         <p class="label">品牌合作</p>
         <h2 class="collab-title">
           你的品牌，<br />
-          需要這樣的空間。
+          也需要一個能被<br />好好感受的地方。
         </h2>
       </div>
       <div class="reveal reveal-d2">
         <p class="collab-body">
-          空間出借、快閃市集、品牌拍攝、<br />
-          香氛活動、讀書會、小型工作坊——<br />
-          歡迎私訊說說你的想法。
+          開放小型市集、品牌快閃、香氛活動、<br />
+          讀書會、選物展示與私密工作坊。
         </p>
         <p class="collab-body" style="margin-top: 1.2rem;">
-          不走量，只接與空間氣質相符的合作。
+          不走大量人流，只接受與空間氣質相近的合作。
         </p>
         <a href="https://line.me/R/ti/p/@380shuki" class="collab-cta">私訊洽詢合作 →</a>
       </div>
@@ -925,14 +1055,17 @@
   <section class="contact">
     <div class="contact-inner">
       <p class="label reveal">預約空間</p>
+      <p class="contact-manifesto reveal">
+        ALUNASTUDIO 不是讓人匆忙使用的場地，<br />
+        而是讓個案、課程、創作與合作都能被好好安放的空間。
+      </p>
       <h2 class="contact-heading reveal reveal-d1">
-        先來說說<br />
-        你要做什麼。
+        先說說你想在<br />
+        這裡發生什麼。
       </h2>
       <p class="contact-sub reveal reveal-d2">
-        私訊告訴我你的需求——<br />
-        用途、時間、大概幾小時。<br />
-        我來幫你確認最合適的方式。
+        告訴我用途、人數、時間與大約需要幾小時。<br />
+        我會協助你判斷這個空間是否適合。
       </p>
       <a href="https://line.me/R/ti/p/@380shuki" class="line-cta reveal reveal-d3">LINE 私訊 →</a>
       <p class="contact-address reveal reveal-d4">
