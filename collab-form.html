@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>提案合作 — AlunaStudio</title>
+  <meta name="description" content="提案你想在 ALUNASTUDIO 發生的事。我們認真讀每一份提案，選擇與空間氣質相符的合作。" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=Noto+Sans+TC:wght@300..400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --wall:    #FAFAF7;
+      --gold:    #C9A84C;
+      --bark:    #2C2418;
+      --clay:    #9E896A;
+      --bark-10: rgba(44, 36, 24, 0.10);
+      --clay-20: rgba(158, 137, 106, 0.20);
+      --clay-40: rgba(158, 137, 106, 0.40);
+      --serif: 'Noto Serif TC', 'Songti TC', serif;
+      --sans:  'Noto Sans TC', 'PingFang TC', sans-serif;
+      --section-v: 9rem;
+      --section-h: 3rem;
+    }
+    @media (min-width: 768px) {
+      :root { --section-v: 11rem; --section-h: 5rem; }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--wall);
+      color: var(--bark);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.12s; }
+    .reveal-d2 { transition-delay: 0.22s; }
+    .reveal-d3 { transition-delay: 0.34s; }
+
+    /* ── Nav ──────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem var(--section-h);
+      pointer-events: none;
+    }
+    .nav > * { pointer-events: auto; }
+    .nav-brand {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.62em;
+      text-transform: uppercase;
+      color: #4B4038;
+    }
+    .nb-u { position: relative; top: 2px; }
+    .nb-s { position: relative; top: -1px; }
+    .nb-d { font-size: 0.88em; }
+    .nb-o { margin-left: 0.18em; }
+    .nav-links { display: none; gap: 5.5rem; }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .nav-links a {
+      font-size: 15px;
+      font-weight: 350;
+      letter-spacing: 0.18em;
+      color: #B7A99B;
+      transition: color 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .nav-en { font-size: 11px; letter-spacing: 0.12em; color: #B7A99B; transition: color 0.3s; }
+    .nav-links a:hover { color: #4A403A; }
+    .nav-links a:hover .nav-en { color: #7a6a58; }
+    .nav-back {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: #8E7461;
+      transition: color 0.4s;
+    }
+    .nav-back:hover { color: #4A403A; }
+
+    /* ── Page Header ──────────────────────────────── */
+    .page-header {
+      padding: calc(var(--section-h) + 7rem) var(--section-h) 5rem;
+      max-width: 740px;
+    }
+    .label {
+      font-family: var(--sans);
+      font-size: 21px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+    .page-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.45;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .page-desc {
+      font-size: 1.05rem;
+      color: var(--clay);
+      line-height: 2.1;
+    }
+    .page-note {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--clay-20);
+      font-size: 0.88rem;
+      color: var(--clay);
+      opacity: 0.7;
+      line-height: 1.9;
+    }
+
+    /* ── Form Layout ──────────────────────────────── */
+    .form-section {
+      padding: 0 var(--section-h) var(--section-v);
+    }
+    .form-inner { max-width: 620px; }
+    .form-block {
+      padding: 3.5rem 0;
+      border-top: 1px solid var(--clay-20);
+    }
+    .form-block-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--clay);
+      opacity: 0.5;
+      margin-bottom: 2.5rem;
+    }
+    .form-fields { display: grid; gap: 2.8rem; }
+    .form-fields-2 { display: grid; gap: 2.5rem; }
+    @media (min-width: 560px) {
+      .form-fields-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── Field ────────────────────────────────────── */
+    .field { display: flex; flex-direction: column; gap: 0.65rem; }
+    .field-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+    .field-hint {
+      font-size: 0.78rem;
+      color: var(--clay);
+      opacity: 0.55;
+      line-height: 1.7;
+      margin-top: -0.2rem;
+    }
+    .field-optional {
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      opacity: 0.5;
+      margin-left: 0.4rem;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--clay-40);
+      outline: none;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--bark);
+      padding: 0.65rem 0;
+      width: 100%;
+      transition: border-color 0.3s;
+      -webkit-font-smoothing: antialiased;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus { border-bottom-color: var(--bark); }
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--clay); opacity: 0.38; }
+    .field select { cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .field select option[value=""] { color: rgba(158,137,106,0.4); }
+    .field textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.85;
+    }
+    .field textarea.tall { min-height: 150px; }
+    .field-error {
+      font-size: 0.74rem;
+      color: #a0604a;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .field.has-error .field-error { opacity: 1; }
+    .field.has-error input,
+    .field.has-error select,
+    .field.has-error textarea { border-bottom-color: #a0604a; }
+
+    /* ── Type Chips ───────────────────────────────── */
+    .type-choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.3rem;
+    }
+    .type-choice { position: relative; }
+    .type-choice input[type="radio"] {
+      position: absolute; opacity: 0; width: 0; height: 0;
+    }
+    .type-choice label {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--clay);
+      border: 1px solid var(--clay-40);
+      padding: 0.38rem 0.88rem;
+      cursor: pointer;
+      transition: border-color 0.25s, color 0.25s;
+      user-select: none;
+    }
+    .type-choice input[type="radio"]:checked + label {
+      border-color: var(--bark);
+      color: var(--bark);
+    }
+    .type-choice label:hover { border-color: var(--clay); color: var(--bark); }
+    .type-error {
+      font-size: 0.74rem;
+      color: #a0604a;
+      opacity: 0;
+      transition: opacity 0.3s;
+      margin-top: 0.4rem;
+    }
+    .type-error.visible { opacity: 1; }
+
+    /* ── Submit ───────────────────────────────────── */
+    .form-submit {
+      padding: 3.5rem 0 0;
+      border-top: 1px solid var(--clay-20);
+    }
+    .submit-btn {
+      display: inline-block;
+      border: 1px solid var(--bark);
+      color: var(--bark);
+      background: transparent;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.88rem;
+      letter-spacing: 0.22em;
+      padding: 1rem 2.75rem;
+      cursor: pointer;
+      transition: background 0.4s, color 0.4s;
+    }
+    .submit-btn:hover { background: var(--bark); color: var(--wall); }
+
+    /* ── Rule ─────────────────────────────────────── */
+    .rule { height: 1px; background: var(--clay-20); margin: 0 var(--section-h); }
+
+    /* ── Success State ────────────────────────────── */
+    .success-state {
+      display: none;
+      padding: calc(var(--section-h) + 7rem) var(--section-h) var(--section-v);
+    }
+    .success-inner { max-width: 520px; }
+    .success-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.5;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .success-body {
+      font-size: 1.05rem;
+      color: var(--clay);
+      line-height: 2.1;
+    }
+    .success-cta {
+      display: inline-block;
+      margin-top: 2.5rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      color: var(--bark);
+      border-bottom: 1px solid var(--clay-40);
+      padding-bottom: 0.2rem;
+      transition: border-color 0.3s;
+    }
+    .success-cta:hover { border-color: var(--bark); }
+
+    /* ── Footer ───────────────────────────────────── */
+    footer {
+      padding: 2rem var(--section-h);
+      border-top: 1px solid rgba(158, 137, 106, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--clay);
+      opacity: 0.45;
+    }
+    .footer-name:hover { opacity: 0.75; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: var(--clay);
+      opacity: 0.45;
+      transition: opacity 0.3s;
+    }
+    .footer-links a:hover { opacity: 1; }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Al<span class="nb-u">u</span>na<span class="nb-s">s</span>t<span class="nb-u">u</span><span class="nb-d">d</span>i<span class="nb-o">o</span></a>
+    <div class="nav-links">
+      <a href="index.html#about">空間<span class="nav-en">Space</span></a>
+      <a href="index.html#pricing">方案<span class="nav-en">Booking</span></a>
+      <a href="index.html#selects">選物<span class="nav-en">Living</span></a>
+      <a href="index.html#collab">企劃<span class="nav-en">Programs</span></a>
+    </div>
+    <a href="index.html#collab" class="nav-back">← 返回</a>
+  </nav>
+
+  <!-- ── Page Header ─────────────────────────────────── -->
+  <header class="page-header">
+    <p class="label reveal">內容企劃</p>
+    <h1 class="page-title reveal reveal-d1">
+      我們選擇<br />
+      一起工作的人。
+    </h1>
+    <p class="page-desc reveal reveal-d2">
+      ALUNASTUDIO 的合作不走公開徵件，<br />
+      而是從提案開始的雙向確認。<br />
+      我們認真讀每一份，但只接受與空間氣質相符的計畫。
+    </p>
+    <p class="page-note reveal reveal-d3">
+      填寫前建議先充分了解這個空間是什麼、不是什麼。<br />
+      你對空間的理解，會反映在你的提案品質裡。
+    </p>
+  </header>
+
+  <!-- ── Form ───────────────────────────────────────── -->
+  <section class="form-section" id="form-section">
+    <div class="form-inner">
+      <form id="collab-form" novalidate>
+
+        <!-- Block 1: 你是誰 -->
+        <div class="form-block">
+          <p class="form-block-label">01 — 你是誰</p>
+          <div class="form-fields">
+
+            <div class="form-fields-2">
+              <div class="field" data-field="name">
+                <label class="field-label" for="name">姓名</label>
+                <input type="text" id="name" name="name" placeholder="你的名字" autocomplete="name" />
+                <span class="field-error">請填寫姓名</span>
+              </div>
+              <div class="field" data-field="email">
+                <label class="field-label" for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" />
+                <span class="field-error">請填寫有效的 Email</span>
+              </div>
+            </div>
+
+            <div class="field" data-field="identity">
+              <label class="field-label" for="identity">你的工作或身份</label>
+              <p class="field-hint">一句話即可，例如：瑜珈老師、聲音療癒師、獨立出版人、香氣品牌主理人⋯⋯</p>
+              <input type="text" id="identity" name="identity" placeholder="你在做什麼工作，或如何認識自己的工作" />
+              <span class="field-error">請簡短描述你的工作或身份</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Block 2: 提案內容 -->
+        <div class="form-block">
+          <p class="form-block-label">02 — 提案內容</p>
+          <div class="form-fields">
+
+            <div class="field" data-field="type">
+              <span class="field-label">合作類型</span>
+              <div class="type-choices">
+                <div class="type-choice">
+                  <input type="radio" id="type-workshop" name="type" value="工作坊" />
+                  <label for="type-workshop">工作坊</label>
+                </div>
+                <div class="type-choice">
+                  <input type="radio" id="type-reading" name="type" value="讀書會／分享活動" />
+                  <label for="type-reading">讀書會 / 分享活動</label>
+                </div>
+                <div class="type-choice">
+                  <input type="radio" id="type-ritual" name="type" value="深度體驗／靜心活動" />
+                  <label for="type-ritual">深度體驗 / 靜心活動</label>
+                </div>
+                <div class="type-choice">
+                  <input type="radio" id="type-exhibition" name="type" value="策展／選物展示" />
+                  <label for="type-exhibition">策展 / 選物展示</label>
+                </div>
+                <div class="type-choice">
+                  <input type="radio" id="type-other" name="type" value="其他" />
+                  <label for="type-other">其他</label>
+                </div>
+              </div>
+              <p class="type-error" id="type-error">請選擇一個合作類型</p>
+            </div>
+
+            <div class="field" data-field="proposal">
+              <label class="field-label" for="proposal">你想在這裡做什麼</label>
+              <p class="field-hint">活動的形式、大致內容、希望帶給參與者什麼感受</p>
+              <textarea id="proposal" name="proposal" class="tall" placeholder="不需要完整計畫，但要讓我們能夠想像這件事的樣子。"></textarea>
+              <span class="field-error">請描述你的提案內容</span>
+            </div>
+
+            <div class="field" data-field="fit">
+              <label class="field-label" for="fit">為什麼覺得這個空間適合你的計畫</label>
+              <p class="field-hint">這個問題沒有標準答案，但答得出來的人，通常是真正對的合作對象。</p>
+              <textarea id="fit" name="fit" placeholder="你對這個空間的理解，以及它與你的工作之間的關係。"></textarea>
+              <span class="field-error">請說明為什麼這個空間適合你的計畫</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Block 3: 實際資訊 -->
+        <div class="form-block">
+          <p class="form-block-label">03 — 實際資訊 <span style="font-size:0.65rem; opacity:0.5; letter-spacing:0.06em; text-transform:none;">選填，有助於我們評估</span></p>
+          <div class="form-fields">
+
+            <div class="form-fields-2">
+              <div class="field" data-field="size">
+                <label class="field-label" for="size">預計人數與時長</label>
+                <input type="text" id="size" name="size" placeholder="例：8–12 人，約 3 小時" />
+              </div>
+              <div class="field" data-field="timing">
+                <label class="field-label" for="timing">希望的時間</label>
+                <input type="text" id="timing" name="timing" placeholder="例：7 月下旬、平日下午" />
+              </div>
+            </div>
+
+            <div class="field" data-field="source">
+              <label class="field-label" for="source">你怎麼認識我們的</label>
+              <select id="source" name="source">
+                <option value="">請選擇</option>
+                <option value="Instagram">Instagram</option>
+                <option value="朋友介紹">朋友介紹</option>
+                <option value="Google">Google 搜尋</option>
+                <option value="曾經使用過空間">曾經使用過空間</option>
+                <option value="其他">其他</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-submit">
+          <button type="submit" class="submit-btn">送出提案</button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- ── Success State ───────────────────────────────── -->
+  <section class="success-state" id="success-state">
+    <div class="success-inner">
+      <p class="label reveal">提案已送出</p>
+      <h2 class="success-title reveal reveal-d1">
+        我們收到了，<br />
+        會認真讀。
+      </h2>
+      <p class="success-body reveal reveal-d2">
+        如果你的計畫與這個空間相符，<br />
+        我們會在 5 個工作日內與你聯繫。<br /><br />
+        不是每份提案都會得到回覆，<br />
+        但每一份都會被認真閱讀。
+      </p>
+      <a href="index.html" class="success-cta reveal reveal-d3">← 回到首頁</a>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <footer>
+    <a href="index.html" class="footer-name">AlunaStudio</a>
+    <div class="footer-links">
+      <a href="https://line.me/R/ti/p/@380shuki" target="_blank">LINE</a>
+      <a href="index.html#about">空間</a>
+      <a href="index.html#pricing">方案</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.page-header .reveal').forEach((el) => {
+        setTimeout(() => el.classList.add('visible'), 100);
+      });
+    });
+
+    document.getElementById('collab-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      let valid = true;
+
+      function validate(id, check) {
+        const el = document.getElementById(id);
+        const field = el.closest('[data-field]');
+        if (!check(el.value)) { field.classList.add('has-error'); valid = false; }
+        else { field.classList.remove('has-error'); }
+      }
+
+      validate('name', v => v.trim().length > 0);
+      validate('email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()));
+      validate('identity', v => v.trim().length > 0);
+      validate('proposal', v => v.trim().length >= 20);
+      validate('fit', v => v.trim().length >= 10);
+
+      const typeChecked = document.querySelector('input[name="type"]:checked');
+      const typeErr = document.getElementById('type-error');
+      if (!typeChecked) { typeErr.classList.add('visible'); valid = false; }
+      else { typeErr.classList.remove('visible'); }
+
+      if (!valid) return;
+
+      document.getElementById('form-section').style.display = 'none';
+      const successEl = document.getElementById('success-state');
+      successEl.style.display = 'block';
+      successEl.querySelectorAll('.reveal').forEach((el) => {
+        setTimeout(() => el.classList.add('visible'), 80);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

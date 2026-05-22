@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>企劃案例 — AlunaStudio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=Noto+Sans+TC:wght@300..400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --wall:    #FAFAF7;
+      --gold:    #C9A84C;
+      --bark:    #2C2418;
+      --clay:    #9E896A;
+      --bark-10: rgba(44, 36, 24, 0.10);
+      --clay-20: rgba(158, 137, 106, 0.20);
+      --clay-40: rgba(158, 137, 106, 0.40);
+      --serif: 'Noto Serif TC', 'Songti TC', serif;
+      --sans:  'Noto Sans TC', 'PingFang TC', sans-serif;
+      --section-v: 9rem;
+      --section-h: 3rem;
+    }
+    @media (min-width: 768px) {
+      :root { --section-v: 11rem; --section-h: 5rem; }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--wall);
+      color: var(--bark);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.12s; }
+    .reveal-d2 { transition-delay: 0.22s; }
+    .reveal-d3 { transition-delay: 0.34s; }
+
+    /* ── Nav ──────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem var(--section-h);
+      pointer-events: none;
+    }
+    .nav > * { pointer-events: auto; }
+    .nav-brand {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.62em;
+      text-transform: uppercase;
+      color: #4B4038;
+    }
+    .nb-u { position: relative; top: 2px; }
+    .nb-s { position: relative; top: -1px; }
+    .nb-d { font-size: 0.88em; }
+    .nb-o { margin-left: 0.18em; }
+    .nav-links { display: none; gap: 5.5rem; }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .nav-links a {
+      font-size: 15px;
+      font-weight: 350;
+      letter-spacing: 0.18em;
+      color: #B7A99B;
+      transition: color 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .nav-en { font-size: 11px; letter-spacing: 0.12em; color: #B7A99B; transition: color 0.3s; }
+    .nav-links a:hover { color: #4A403A; }
+    .nav-links a:hover .nav-en { color: #7a6a58; }
+    .nav-back {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: #8E7461;
+      transition: color 0.4s;
+    }
+    .nav-back:hover { color: #4A403A; }
+
+    /* ── Page Header ──────────────────────────────── */
+    .page-header {
+      padding: calc(var(--section-h) + 7rem) var(--section-h) var(--section-v);
+      max-width: 680px;
+    }
+    .label {
+      font-family: var(--sans);
+      font-size: 21px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+    .page-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.45;
+      margin-top: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .page-desc {
+      font-size: 1.1rem;
+      color: var(--clay);
+      line-height: 2.1;
+    }
+
+    /* ── Rule ─────────────────────────────────────── */
+    .rule { height: 1px; background: var(--clay-20); margin: 0 var(--section-h); }
+
+    /* ── Cases ────────────────────────────────────── */
+    .cases-section {
+      padding: var(--section-v) var(--section-h);
+    }
+    .cases-inner { max-width: 900px; }
+
+    .cases-empty {
+      padding: 5rem 0;
+      border-top: 1px solid var(--clay-20);
+      border-bottom: 1px solid var(--clay-20);
+    }
+    .cases-empty-text {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      line-height: 1.9;
+      color: var(--clay);
+      opacity: 0.65;
+    }
+    .cases-empty-sub {
+      font-size: 0.9rem;
+      color: var(--clay);
+      opacity: 0.45;
+      margin-top: 1.5rem;
+      line-height: 1.9;
+    }
+
+    /* Placeholder case cards (for when content is added) */
+    .cases-grid {
+      display: grid;
+      gap: 4rem;
+      margin-top: 4rem;
+    }
+    .case-item {
+      display: grid;
+      gap: 3rem;
+      align-items: start;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--clay-20);
+    }
+    @media (min-width: 768px) {
+      .case-item { grid-template-columns: 1fr 1.5fr; }
+    }
+    .case-img {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .case-img-ph {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(150deg, #E8E0D4 0%, #D4C4B0 60%, #C0B098 100%);
+    }
+    .case-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1rem;
+    }
+    .case-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .case-desc {
+      font-size: 1rem;
+      color: var(--clay);
+      line-height: 2;
+    }
+    .case-meta {
+      font-size: 0.82rem;
+      color: var(--clay);
+      opacity: 0.5;
+      margin-top: 1.2rem;
+    }
+
+    /* ── CTA Block ────────────────────────────────── */
+    .cta-block {
+      padding: var(--section-v) var(--section-h);
+      max-width: 520px;
+    }
+    .cta-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      line-height: 1.5;
+      margin-top: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .cta-body {
+      font-size: 1.05rem;
+      color: var(--clay);
+      line-height: 2.1;
+      margin-bottom: 2.5rem;
+    }
+    .cta-link {
+      display: inline-block;
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
+      color: var(--bark);
+      border-bottom: 1px solid var(--clay-40);
+      padding-bottom: 0.2rem;
+      transition: border-color 0.3s;
+    }
+    .cta-link:hover { border-color: var(--bark); }
+
+    /* ── Footer ───────────────────────────────────── */
+    footer {
+      padding: 2rem var(--section-h);
+      border-top: 1px solid rgba(158, 137, 106, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--clay);
+      opacity: 0.45;
+    }
+    .footer-name:hover { opacity: 0.75; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: var(--clay);
+      opacity: 0.45;
+      transition: opacity 0.3s;
+    }
+    .footer-links a:hover { opacity: 1; }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Al<span class="nb-u">u</span>na<span class="nb-s">s</span>t<span class="nb-u">u</span><span class="nb-d">d</span>i<span class="nb-o">o</span></a>
+    <div class="nav-links">
+      <a href="index.html#about">空間<span class="nav-en">Space</span></a>
+      <a href="index.html#pricing">方案<span class="nav-en">Booking</span></a>
+      <a href="index.html#selects">選物<span class="nav-en">Living</span></a>
+      <a href="index.html#collab">企劃<span class="nav-en">Programs</span></a>
+    </div>
+    <a href="index.html#collab" class="nav-back">← 返回</a>
+  </nav>
+
+  <!-- ── Page Header ─────────────────────────────────── -->
+  <header class="page-header">
+    <p class="label reveal">內容企劃</p>
+    <h1 class="page-title reveal reveal-d1">
+      在這裡發生過的事。
+    </h1>
+    <p class="page-desc reveal reveal-d2">
+      每一次合作都有它自己的形狀。<br />
+      這裡記錄的是那些留下來的片段。
+    </p>
+  </header>
+
+  <div class="rule"></div>
+
+  <!-- ── Cases ──────────────────────────────────────── -->
+  <section class="cases-section">
+    <div class="cases-inner">
+
+      <!-- 目前無案例時顯示此區塊，有案例後替換為 cases-grid -->
+      <div class="cases-empty reveal">
+        <p class="cases-empty-text">
+          案例陸續整理中。<br />
+          目前以邀請制合作為主，<br />
+          每一個企劃都在進行中。
+        </p>
+        <p class="cases-empty-sub">
+          若想了解可能的合作方式，<br />
+          歡迎直接填寫提案。
+        </p>
+      </div>
+
+      <!--
+        案例卡片模板（有內容後使用）：
+
+        <div class="cases-grid">
+          <div class="case-item reveal">
+            <div class="case-img">
+              <div class="case-img-ph"></div>
+            </div>
+            <div>
+              <p class="case-tag">讀書會 · 2025.03</p>
+              <h2 class="case-title">活動標題放這裡</h2>
+              <p class="case-desc">活動描述、發生了什麼、留下了什麼感受。</p>
+              <p class="case-meta">參與人數 · 地點 · 合作單位</p>
+            </div>
+          </div>
+        </div>
+      -->
+
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ── CTA ────────────────────────────────────────── -->
+  <section class="cta-block">
+    <p class="label reveal">提案合作</p>
+    <h2 class="cta-title reveal reveal-d1">
+      有一個想法<br />
+      想讓它發生？
+    </h2>
+    <p class="cta-body reveal reveal-d2">
+      告訴我們你想做什麼。<br />
+      不需要完整的計畫，一個開頭就夠了。
+    </p>
+    <a href="collab-form.html" class="cta-link reveal reveal-d3">→ 填寫提案表單</a>
+  </section>
+
+  <footer>
+    <a href="index.html" class="footer-name">AlunaStudio</a>
+    <div class="footer-links">
+      <a href="https://line.me/R/ti/p/@380shuki" target="_blank">LINE</a>
+      <a href="index.html#about">空間</a>
+      <a href="index.html#pricing">方案</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.page-header .reveal').forEach((el) => {
+        setTimeout(() => el.classList.add('visible'), 100);
+      });
+    });
+  </script>
+
+</body>
+</html>

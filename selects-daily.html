@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>停留日常 — AlunaStudio</title>
+  <meta name="description" content="閱讀、聲音與生活片段，讓停留慢慢延伸。AlunaStudio 停留日常選品。" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=Noto+Sans+TC:wght@300..400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --wall:    #FAFAF7;
+      --gold:    #C9A84C;
+      --bark:    #2C2418;
+      --clay:    #9E896A;
+      --clay-20: rgba(158, 137, 106, 0.20);
+      --clay-40: rgba(158, 137, 106, 0.40);
+      --serif: 'Noto Serif TC', 'Songti TC', serif;
+      --sans:  'Noto Sans TC', 'PingFang TC', sans-serif;
+      --section-v: 9rem;
+      --section-h: 3rem;
+    }
+    @media (min-width: 768px) {
+      :root { --section-v: 11rem; --section-h: 5rem; }
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--wall); color: var(--bark); font-family: var(--sans); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.12s; }
+    .reveal-d2 { transition-delay: 0.22s; }
+    .reveal-d3 { transition-delay: 0.34s; }
+    .reveal-d4 { transition-delay: 0.46s; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2.2rem var(--section-h); pointer-events: none; }
+    .nav > * { pointer-events: auto; }
+    .nav-brand { font-family: var(--sans); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.62em; text-transform: uppercase; color: #4B4038; }
+    .nb-u { position: relative; top: 2px; } .nb-s { position: relative; top: -1px; } .nb-d { font-size: 0.88em; } .nb-o { margin-left: 0.18em; }
+    .nav-links { display: none; gap: 5.5rem; }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .nav-links a { font-size: 15px; font-weight: 350; letter-spacing: 0.18em; color: #B7A99B; transition: color 0.3s; display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+    .nav-en { font-size: 11px; letter-spacing: 0.12em; color: #B7A99B; transition: color 0.3s; }
+    .nav-links a:hover { color: #4A403A; } .nav-links a:hover .nav-en { color: #7a6a58; }
+    .nav-back { font-size: 0.78rem; letter-spacing: 0.18em; color: #8E7461; transition: color 0.4s; }
+    .nav-back:hover { color: #4A403A; }
+
+    .cat-header { padding: calc(var(--section-h) + 7rem) var(--section-h) var(--section-v); display: grid; gap: 3rem; align-items: end; max-width: 1100px; }
+    @media (min-width: 768px) { .cat-header { grid-template-columns: 1fr 1fr; } }
+    .label { font-family: var(--sans); font-size: 21px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--clay); }
+    .cat-title { font-family: var(--serif); font-weight: 300; font-size: clamp(2.2rem, 5.5vw, 4rem); line-height: 1.4; margin-top: 1.5rem; }
+    .cat-intro { font-size: 1.1rem; color: var(--clay); line-height: 2.1; }
+    .cat-intro + .cat-intro { margin-top: 1.2rem; }
+
+    .rule { height: 1px; background: var(--clay-20); margin: 0 var(--section-h); }
+
+    .editorial { padding: var(--section-v) var(--section-h); background: #2C2418; }
+    .editorial-inner { max-width: 680px; margin: 0 auto; }
+    .editorial-text { font-family: var(--serif); font-weight: 300; font-size: clamp(1.1rem, 2.2vw, 1.45rem); line-height: 2; color: rgba(250, 250, 247, 0.72); }
+    .editorial-text + .editorial-text { margin-top: 1.5rem; }
+    .editorial-quote { font-size: 0.82rem; letter-spacing: 0.08em; color: rgba(250, 250, 247, 0.28); margin-top: 3rem; }
+
+    .products { padding: var(--section-v) var(--section-h); }
+    .products-inner { max-width: 1100px; margin: 0 auto; }
+    .products-label { font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); opacity: 0.6; margin-bottom: 3.5rem; }
+    .products-grid { display: grid; gap: 4rem 3rem; grid-template-columns: 1fr; }
+    @media (min-width: 560px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+    .product-img { aspect-ratio: 3 / 4; overflow: hidden; margin-bottom: 1.5rem; }
+    .product-img-ph { width: 100%; height: 100%; }
+    .ph-1 { background: linear-gradient(150deg, #D6CABD 0%, #C0B0A0 60%, #A49080 100%); }
+    .ph-2 { background: linear-gradient(150deg, #CEBFB0 0%, #B8A894 60%, #A09080 100%); }
+    .ph-3 { background: linear-gradient(150deg, #D8CCBE 0%, #C4B4A4 60%, #ACA090 100%); }
+    .product-tag { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); opacity: 0.6; margin-bottom: 0.5rem; }
+    .product-name { font-family: var(--serif); font-weight: 300; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.65; margin-bottom: 0.75rem; }
+    .product-desc { font-size: 0.95rem; color: var(--clay); line-height: 1.9; }
+    .product-cta { display: inline-block; margin-top: 1.2rem; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--clay); border-bottom: 1px solid currentColor; padding-bottom: 0.1em; opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
+    .product-cta:hover { opacity: 1; color: var(--gold); }
+
+    .other-cats { padding: var(--section-v) var(--section-h); border-top: 1px solid var(--clay-20); }
+    .other-cats-inner { max-width: 900px; margin: 0 auto; }
+    .other-cats-label { font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); opacity: 0.6; margin-bottom: 3rem; }
+    .other-cats-grid { display: grid; gap: 2rem; }
+    @media (min-width: 600px) { .other-cats-grid { grid-template-columns: 1fr 1fr; } }
+    .other-cat-link { display: flex; flex-direction: column; gap: 0.5rem; padding: 2rem 0; border-top: 1px solid var(--clay-20); transition: opacity 0.3s; }
+    .other-cat-link:hover { opacity: 0.65; }
+    .other-cat-name { font-family: var(--serif); font-weight: 300; font-size: 1.2rem; color: var(--bark); }
+    .other-cat-desc { font-size: 0.9rem; color: var(--clay); line-height: 1.8; }
+    .other-cat-arrow { font-size: 0.8rem; color: var(--clay); opacity: 0.5; margin-top: 0.5rem; }
+
+    footer { padding: 2rem var(--section-h); border-top: 1px solid rgba(158, 137, 106, 0.12); display: flex; justify-content: space-between; align-items: center; }
+    .footer-name { font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--clay); opacity: 0.45; }
+    .footer-name:hover { opacity: 0.75; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-size: 0.78rem; letter-spacing: 0.12em; color: var(--clay); opacity: 0.45; transition: opacity 0.3s; }
+    .footer-links a:hover { opacity: 1; }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Al<span class="nb-u">u</span>na<span class="nb-s">s</span>t<span class="nb-u">u</span><span class="nb-d">d</span>i<span class="nb-o">o</span></a>
+    <div class="nav-links">
+      <a href="index.html#about">空間<span class="nav-en">Space</span></a>
+      <a href="index.html#pricing">方案<span class="nav-en">Booking</span></a>
+      <a href="index.html#selects">選物<span class="nav-en">Living</span></a>
+      <a href="index.html#collab">企劃<span class="nav-en">Programs</span></a>
+    </div>
+    <a href="index.html#selects" class="nav-back">← 返回</a>
+  </nav>
+
+  <header class="cat-header">
+    <div>
+      <p class="label reveal">生活選品</p>
+      <h1 class="cat-title reveal reveal-d1">
+        停留<br />日常
+      </h1>
+    </div>
+    <div>
+      <p class="cat-intro reveal reveal-d2">
+        閱讀、聲音與生活片段，<br />
+        讓停留慢慢延伸。
+      </p>
+      <p class="cat-intro reveal reveal-d3">
+        選的不只是書或音樂，<br />
+        而是那些讓一段時間變得有質地的東西。
+      </p>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <div class="editorial-inner">
+      <p class="editorial-text reveal">
+        停留，是一種需要練習的能力。
+      </p>
+      <p class="editorial-text reveal reveal-d1">
+        有些書是為了快速讀完，<br />
+        有些書是為了讓你慢下來。<br />
+        我們選的是後者。<br /><br />
+        同樣的邏輯，也適用於聲音與生活的其他片段。
+      </p>
+      <p class="editorial-quote reveal reveal-d2">停留日常 · Reading, Sound & Life</p>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="products-inner">
+      <p class="products-label reveal">選品</p>
+      <div class="products-grid">
+
+        <article class="product-item reveal reveal-d1">
+          <div class="product-img"><div class="product-img-ph ph-1"></div></div>
+          <p class="product-tag">閱讀 · Reading</p>
+          <h2 class="product-name">書名放這裡</h2>
+          <p class="product-desc">一句話說明這本書為什麼值得帶回家，以及適合什麼狀態的人讀。</p>
+          <a href="#" class="product-cta">→ 前往購買</a>
+        </article>
+
+        <article class="product-item reveal reveal-d2">
+          <div class="product-img"><div class="product-img-ph ph-2"></div></div>
+          <p class="product-tag">聲音 · Sound</p>
+          <h2 class="product-name">作品名稱放這裡</h2>
+          <p class="product-desc">描述這段聲音或音樂的特質，以及在什麼空間狀態下適合播放。</p>
+          <a href="#" class="product-cta">→ 前往購買</a>
+        </article>
+
+        <article class="product-item reveal reveal-d3">
+          <div class="product-img"><div class="product-img-ph ph-3"></div></div>
+          <p class="product-tag">生活片段 · Daily</p>
+          <h2 class="product-name">品項名稱放這裡</h2>
+          <p class="product-desc">描述這件事物如何讓日常的停留變得更有質感。</p>
+          <a href="#" class="product-cta">→ 前往購買</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="other-cats">
+    <div class="other-cats-inner">
+      <p class="other-cats-label reveal">其他選品</p>
+      <div class="other-cats-grid">
+        <a href="selects-obj.html" class="other-cat-link reveal reveal-d1">
+          <span class="other-cat-name">日常物件</span>
+          <span class="other-cat-desc">一只杯子、一塊木盤，讓空間慢下來的東西。</span>
+          <span class="other-cat-arrow">→ 查看選品</span>
+        </a>
+        <a href="selects-scent.html" class="other-cat-link reveal reveal-d2">
+          <span class="other-cat-name">空間香氣</span>
+          <span class="other-cat-desc">有些味道，會讓人終於願意慢下來。</span>
+          <span class="other-cat-arrow">→ 探索香氣</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <footer>
+    <a href="index.html" class="footer-name">AlunaStudio</a>
+    <div class="footer-links">
+      <a href="https://line.me/R/ti/p/@380shuki" target="_blank">LINE</a>
+      <a href="index.html#about">空間</a>
+      <a href="index.html#selects">選物</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => { entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.cat-header .reveal').forEach((el) => { setTimeout(() => el.classList.add('visible'), 100); });
+    });
+  </script>
+
+</body>
+</html>
